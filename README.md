@@ -7,7 +7,5 @@ Data Warehouse for financial statement data and stock prices
 	- schema _sql database, schema, table, index creation scripts_
 	- etl _ssis etl projects_
 
-- [ ] abs @sdf #123 
-
 	
 
