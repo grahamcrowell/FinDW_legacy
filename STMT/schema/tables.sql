@@ -18,7 +18,7 @@ CREATE TABLE dim.Date(
 	,Year AS YEAR(Date) 
 	,Month AS MONTH(Date)
 	,Day AS DAY(Date)
-	,mdy AS FORMAT(Date, 'M/d/yyyy')
+	,mdy AS CAST(FORMAT(Date, 'M/d/yyyy') AS varchar(12))
 	,isTradeDate bit NULL
 	,CONSTRAINT PK_Date PRIMARY KEY CLUSTERED (DateID ASC)
 	);
@@ -118,10 +118,10 @@ PRINT 'create Statement'
 CREATE TABLE Statement(
 	FactID bigint NOT NULL
 	,CID bigint NOT NULL
-	,FiscalYear int NOT NULL
+	-- ,FiscalYear int NOT NULL
 	,FiscalQuarter smallint NOT NULL
 	,PeriodEndDateID int NOT NULL
-	,StatementTypeID smallint NOT NULL
+	,StatementID smallint NOT NULL
 	,AccountID int NULL
 	,SubAccountID int NULL
 	,Value bigint NOT NULL
@@ -153,7 +153,7 @@ CREATE TABLE staging.Statement(
 	,ValueStr varchar(16) NULL
 
 	,CID bigint NULL
-	,PeriodEndDate date NULL
+	,PeriodEndDateID int NULL
 	,FiscalQuarter tinyint NULL
 	,StatementID tinyint NULL
 	,AccountID tinyint NULL

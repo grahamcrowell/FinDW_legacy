@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="stmtLoad"
   DTS:PackageType="5"
-  DTS:VersionBuild="30"
-  DTS:VersionGUID="{8388BF2A-4666-4753-99AE-DEE48E1B9E7E}">
+  DTS:VersionBuild="32"
+  DTS:VersionGUID="{9FBCA585-E22A-4CC8-B59C-191C91AB09E7}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -150,12 +150,12 @@
       DTS:CreationName=""
       DTS:DTSID="{9F910915-3A7B-43B9-ABE6-49F4E7D6B5B3}"
       DTS:EvaluateAsExpression="True"
-      DTS:Expression="@[$Project::enviroment_data_root]+&quot;stmt\\completed\\&quot;"
+      DTS:Expression="@[$Project::data_dst_dir]"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="flat_file_completed_dir">
       <DTS:VariableValue
-        DTS:DataType="8">C:\Users\user\data\DEV\stmt\completed\</DTS:VariableValue>
+        DTS:DataType="8">C:\Users\user\data\DEV\stmt\loaded\</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
@@ -166,35 +166,13 @@
       DTS:Namespace="User"
       DTS:ObjectName="flat_file_completed_path">
       <DTS:VariableValue
-        DTS:DataType="8">C:\Users\user\data\DEV\stmt\completed\618_2_2015-10-05_80.csv</DTS:VariableValue>
-    </DTS:Variable>
-    <DTS:Variable
-      DTS:CreationName=""
-      DTS:DTSID="{33FB4023-BFF7-4628-9487-8136863B3100}"
-      DTS:EvaluateAsExpression="True"
-      DTS:Expression="@[$Project::enviroment_data_root]+&quot;stmt\\failed\\&quot;"
-      DTS:IncludeInDebugDump="2345"
-      DTS:Namespace="User"
-      DTS:ObjectName="flat_file_failed_dir">
-      <DTS:VariableValue
-        DTS:DataType="8">C:\Users\user\data\DEV\stmt\failed\</DTS:VariableValue>
-    </DTS:Variable>
-    <DTS:Variable
-      DTS:CreationName=""
-      DTS:DTSID="{9300BEF5-68EE-47DE-B8FB-5FB58B32494C}"
-      DTS:EvaluateAsExpression="True"
-      DTS:Expression="@[User::flat_file_failed_dir]+ @[User::flat_file_name]"
-      DTS:IncludeInDebugDump="2345"
-      DTS:Namespace="User"
-      DTS:ObjectName="flat_file_failed_path">
-      <DTS:VariableValue
-        DTS:DataType="8">C:\Users\user\data\DEV\stmt\failed\618_2_2015-10-05_80.csv</DTS:VariableValue>
+        DTS:DataType="8">C:\Users\user\data\DEV\stmt\loaded\618_2_2015-10-05_80.csv</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
       DTS:DTSID="{FC4F66CB-2140-49B1-BA72-98EBD992F673}"
       DTS:EvaluateAsExpression="True"
-      DTS:Expression="@[$Project::enviroment_data_root]+&quot;stmt\\loading\\&quot;"
+      DTS:Expression="@[$Project::data_src_dir]"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="flat_file_loading_dir">
@@ -1037,6 +1015,10 @@
           Size="172.8,41.6"
           Id="Package\stmt file loop\load data move files\load stmt to staging"
           TopLeft="20.3571431101585,31.1941180074091" />
+        <NodeLayout
+          Size="174.4,41.6"
+          Id="Package\stmt file loop\load data move files\move completed file"
+          TopLeft="22.6428574347983,109.547059587129" />
         <EdgeLayout
           Id="Package\stmt file loop\load data move files.PrecedenceConstraints[Constraint]"
           TopLeft="108.300000272478,72.7941180074091">
@@ -1059,10 +1041,6 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="174.4,41.6"
-          Id="Package\stmt file loop\load data move files\move completed file"
-          TopLeft="22.6428574347983,109.547059587129" />
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
@@ -1110,19 +1088,19 @@
     design-time-name="Package\stmt file loop\load data move files\load stmt to staging">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="163.2,41.6"
-          Id="Package\stmt file loop\load data move files\load stmt to staging\staging statement"
-          TopLeft="277.714290443732,252.200003537009" />
+          Size="132.8,41.6"
+          Id="Package\stmt file loop\load data move files\load stmt to staging\import date"
+          TopLeft="289.142862066931,157.835296331227" />
         <NodeLayout
           Size="150.4,41.6"
           Id="Package\stmt file loop\load data move files\load stmt to staging\Flat File Source"
           TopLeft="286.857147742291,52.0000007292804" />
         <NodeLayout
-          Size="132.8,41.6"
-          Id="Package\stmt file loop\load data move files\load stmt to staging\import date"
-          TopLeft="289.142862066931,157.835296331227" />
+          Size="163.2,41.6"
+          Id="Package\stmt file loop\load data move files\load stmt to staging\staging statement"
+          TopLeft="277.714290443732,252.200003537009" />
         <EdgeLayout
           Id="Package\stmt file loop\load data move files\load stmt to staging.Paths[Flat File Source Output]"
           TopLeft="358.800004904611,93.6000007292804">
@@ -1142,7 +1120,9 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -1164,7 +1144,9 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>

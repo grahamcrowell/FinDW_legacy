@@ -116,7 +116,7 @@ def parse_stmt(path):
 						data.append(tmp_elem)
 						index += 1
 
-				csv_path = tools.get_out_path(path,out_dir,'.csv')
+				csv_path = tools.get_out_path(path,tools.stmt_loading,'.csv')
 				header = ['import_path','CIDStr','StatementIDStr','download_date','FiscalQuarterStr','PeriodEndDateStr','AccountStr','SubAccountStr','ValueStr']
 				with open(csv_path,'w') as csv:
 					tmp_line = '{},{},{},{},{},{},{},{},{}\n'.format(*header)
@@ -125,15 +125,14 @@ def parse_stmt(path):
 						tmp_line = '"{}",{},{},{},{},{},"{}","{}",{}'.format(*datum)
 						# print(tmp_line)
 						csv.write(tmp_line+'\n')
-			shutil.move(path,tools.get_out_path(path,archive_dir))
+			shutil.move(path,tools.get_out_path(path,tools.stmt_parsed))
 			return (path,len(qtrs))
 		except Exception as e:
 			print(e)
 			print('path: {}\nlinenum: {}\n'.format(path,html_line_num))
 
 def parse_staged_files():
-	paths_in = tools.get_paths(in_dir)
-	print('parsing {} html files in staging dir: {}'.format(len(paths_in),in_dir))
+	print('parsing {} html files in staging dir: {}'.format(len(paths_in),tools.stmt_html))
 	pool = mp.Pool()
 	res = pool.map_async(parse_stmt,paths_in)	
 	syms_cids = res.get(timeout=len(paths_in))
