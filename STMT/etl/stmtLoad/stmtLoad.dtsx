@@ -1,0 +1,1187 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="12/23/2015 1:58:26 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="PC"
+  DTS:CreatorName="PC\user"
+  DTS:DTSID="{F71722DF-C650-4BD6-92A8-CD7B91E5A77C}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.5583.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="stmtLoad"
+  DTS:PackageType="5"
+  DTS:VersionBuild="30"
+  DTS:VersionGUID="{8388BF2A-4666-4753-99AE-DEE48E1B9E7E}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[FinDW]"
+      DTS:CreationName="OLEDB"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{9A87E336-1E4C-423F-A30F-D9F04CAADB74}"
+      DTS:ObjectName="FinDW">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::FinDW_conn_str]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=PC\;Initial Catalog=FinDW;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Flat File Connection Manager]"
+      DTS:CreationName="FLATFILE"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{D245A859-568F-4D07-8E11-27EB81B8B14B}"
+      DTS:ObjectName="Flat File Connection Manager">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::flat_file_loading_path]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x0022_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="C:\Users\user\data\DEV\stmt\loading\618_2_2015-10-05_80.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="255"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="import_path"
+              DTS:DTSID="{F34D4F4F-9370-40F2-BA73-4C707B4F2296}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="16"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CIDStr"
+              DTS:DTSID="{26064314-3553-44B8-8757-F73FD16F0C2C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="StatementIDStr"
+              DTS:DTSID="{5CB00AC5-88E1-409A-AED5-5A5AA529EA18}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="download_date"
+              DTS:DTSID="{8785ABDB-0BFF-44D9-BCB4-860B3EAAD9E8}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="FiscalQuarterStr"
+              DTS:DTSID="{62EB9076-B7EA-4FDD-A4FD-C6DD24D01291}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="15"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PeriodEndDateStr"
+              DTS:DTSID="{00DF9D7A-ABF2-475E-81D3-821F00776F38}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="AccountStr"
+              DTS:DTSID="{9060C029-A4D6-4EC9-A5B7-F67E8932FA9C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SubAccountStr"
+              DTS:DTSID="{82D5C1BB-6EFD-4EA3-993B-E8288FDF83F3}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="16"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ValueStr"
+              DTS:DTSID="{24F95583-0454-4F46-BDF4-8A199860D660}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{B196C572-828A-4460-9BF8-1CCF900E6A98}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;Data Source=&quot;+ @[$Project::enviroment_server] +&quot;;Initial Catalog=FinDW;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FinDW_conn_str">
+      <DTS:VariableValue
+        DTS:DataType="8">Data Source=PC\;Initial Catalog=FinDW;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{9F910915-3A7B-43B9-ABE6-49F4E7D6B5B3}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[$Project::enviroment_data_root]+&quot;stmt\\completed\\&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="flat_file_completed_dir">
+      <DTS:VariableValue
+        DTS:DataType="8">C:\Users\user\data\DEV\stmt\completed\</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{BAE87E8F-3D1B-4378-AE52-1164C27F28FF}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::flat_file_completed_dir]+ @[User::flat_file_name]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="flat_file_completed_path">
+      <DTS:VariableValue
+        DTS:DataType="8">C:\Users\user\data\DEV\stmt\completed\618_2_2015-10-05_80.csv</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{33FB4023-BFF7-4628-9487-8136863B3100}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[$Project::enviroment_data_root]+&quot;stmt\\failed\\&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="flat_file_failed_dir">
+      <DTS:VariableValue
+        DTS:DataType="8">C:\Users\user\data\DEV\stmt\failed\</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{9300BEF5-68EE-47DE-B8FB-5FB58B32494C}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::flat_file_failed_dir]+ @[User::flat_file_name]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="flat_file_failed_path">
+      <DTS:VariableValue
+        DTS:DataType="8">C:\Users\user\data\DEV\stmt\failed\618_2_2015-10-05_80.csv</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{FC4F66CB-2140-49B1-BA72-98EBD992F673}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[$Project::enviroment_data_root]+&quot;stmt\\loading\\&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="flat_file_loading_dir">
+      <DTS:VariableValue
+        DTS:DataType="8">C:\Users\user\data\DEV\stmt\loading\</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{5106FC05-FFCB-4A63-8BB6-8508A075D190}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::flat_file_loading_dir]+ @[User::flat_file_name]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="flat_file_loading_path">
+      <DTS:VariableValue
+        DTS:DataType="8">C:\Users\user\data\DEV\stmt\loading\618_2_2015-10-05_80.csv</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{EA93A7F1-7E1E-4821-9AD8-1F890F40693C}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="flat_file_name">
+      <DTS:VariableValue
+        DTS:DataType="8">618_2_2015-10-05_80.csv</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\stmt file loop"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:DelayValidation="True"
+      DTS:Description="Foreach Loop Container"
+      DTS:DTSID="{04BB9C43-FE5D-43BE-A90C-F2CE878D677A}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="stmt file loop">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="DTS.ForEachFileEnumerator.3"
+        DTS:DTSID="{2A142BCE-1183-4B30-9295-7D0A8E272E76}"
+        DTS:ObjectName="{2A142BCE-1183-4B30-9295-7D0A8E272E76}">
+        <DTS:PropertyExpression
+          DTS:Name="Directory">@[User::flat_file_loading_dir]</DTS:PropertyExpression>
+        <DTS:ObjectData>
+          <ForEachFileEnumeratorProperties>
+            <FEFEProperty
+              Folder="C:\Users\user\data\DEV\stmt\loading\" />
+            <FEFEProperty
+              FileSpec="*.csv" />
+            <FEFEProperty
+              FileNameRetrievalType="1" />
+            <FEFEProperty
+              Recurse="0" />
+          </ForEachFileEnumeratorProperties>
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\stmt file loop\load data move files"
+          DTS:CreationName="STOCK:SEQUENCE"
+          DTS:Description="Sequence Container"
+          DTS:DTSID="{BD84C7AE-8F44-44C4-A24A-E964E01E974D}"
+          DTS:ExecutableType="STOCK:SEQUENCE"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="load data move files">
+          <DTS:Variables />
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\stmt file loop\load data move files\load stmt to staging"
+              DTS:CreationName="SSIS.Pipeline.3"
+              DTS:Description="Data Flow Task"
+              DTS:DTSID="{4D21B140-BF14-4C74-B630-B4828B02965B}"
+              DTS:ExecutableType="SSIS.Pipeline.3"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="load stmt to staging"
+              DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <pipeline
+                  version="1">
+                  <components>
+                    <component
+                      refId="Package\stmt file loop\load data move files\load stmt to staging\Flat File Source"
+                      componentClassID="{D23FD76B-F51D-420F-BBCB-19CBF6AC1AB4}"
+                      contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                      description="Flat File Source"
+                      localeId="1033"
+                      name="Flat File Source"
+                      usesDispositions="true"
+                      validateExternalMetadata="False"
+                      version="1">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Specifies whether zero-length columns are treated as null."
+                          name="RetainNulls">false</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                          name="FileNameColumnName"></property>
+                      </properties>
+                      <connections>
+                        <connection
+                          refId="Package\stmt file loop\load data move files\load stmt to staging\Flat File Source.Connections[FlatFileConnection]"
+                          connectionManagerID="Package.ConnectionManagers[Flat File Connection Manager]"
+                          connectionManagerRefId="Package.ConnectionManagers[Flat File Connection Manager]"
+                          name="FlatFileConnection" />
+                      </connections>
+                      <outputs>
+                        <output
+                          refId="Package\stmt file loop\load data move files\load stmt to staging\Flat File Source.Outputs[Flat File Source Output]"
+                          name="Flat File Source Output">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\stmt file loop\load data move files\load stmt to staging\Flat File Source.Outputs[Flat File Source Output].Columns[import_path]"
+                              codePage="1252"
+                              dataType="str"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\stmt file loop\load data move files\load stmt to staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[import_path]"
+                              length="255"
+                              lineageId="Package\stmt file loop\load data move files\load stmt to staging\Flat File Source.Outputs[Flat File Source Output].Columns[import_path]"
+                              name="import_path"
+                              truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                                  name="FastParse">false</property>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the data is in binary format."
+                                  name="UseBinaryFormat">false</property>
+                              </properties>
+                            </outputColumn>
+                            <outputColumn
+                              refId="Package\stmt file loop\load data move files\load stmt to staging\Flat File Source.Outputs[Flat File Source Output].Columns[CIDStr]"
+                              codePage="1252"
+                              dataType="str"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\stmt file loop\load data move files\load stmt to staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[CIDStr]"
+                              length="16"
+                              lineageId="Package\stmt file loop\load data move files\load stmt to staging\Flat File Source.Outputs[Flat File Source Output].Columns[CIDStr]"
+                              name="CIDStr"
+                              truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                                  name="FastParse">false</property>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the data is in binary format."
+                                  name="UseBinaryFormat">false</property>
+                              </properties>
+                            </outputColumn>
+                            <outputColumn
+                              refId="Package\stmt file loop\load data move files\load stmt to staging\Flat File Source.Outputs[Flat File Source Output].Columns[StatementIDStr]"
+                              codePage="1252"
+                              dataType="str"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\stmt file loop\load data move files\load stmt to staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[StatementIDStr]"
+                              length="1"
+                              lineageId="Package\stmt file loop\load data move files\load stmt to staging\Flat File Source.Outputs[Flat File Source Output].Columns[StatementIDStr]"
+                              name="StatementIDStr"
+                              truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                                  name="FastParse">false</property>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the data is in binary format."
+                                  name="UseBinaryFormat">false</property>
+                              </properties>
+                            </outputColumn>
+                            <outputColumn
+                              refId="Package\stmt file loop\load data move files\load stmt to staging\Flat File Source.Outputs[Flat File Source Output].Columns[download_date]"
+                              codePage="1252"
+                              dataType="str"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\stmt file loop\load data move files\load stmt to staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[download_date]"
+                              length="50"
+                              lineageId="Package\stmt file loop\load data move files\load stmt to staging\Flat File Source.Outputs[Flat File Source Output].Columns[download_date]"
+                              name="download_date"
+                              truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                                  name="FastParse">false</property>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the data is in binary format."
+                                  name="UseBinaryFormat">false</property>
+                              </properties>
+                            </outputColumn>
+                            <outputColumn
+                              refId="Package\stmt file loop\load data move files\load stmt to staging\Flat File Source.Outputs[Flat File Source Output].Columns[FiscalQuarterStr]"
+                              codePage="1252"
+                              dataType="str"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\stmt file loop\load data move files\load stmt to staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[FiscalQuarterStr]"
+                              length="1"
+                              lineageId="Package\stmt file loop\load data move files\load stmt to staging\Flat File Source.Outputs[Flat File Source Output].Columns[FiscalQuarterStr]"
+                              name="FiscalQuarterStr"
+                              truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                                  name="FastParse">false</property>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the data is in binary format."
+                                  name="UseBinaryFormat">false</property>
+                              </properties>
+                            </outputColumn>
+                            <outputColumn
+                              refId="Package\stmt file loop\load data move files\load stmt to staging\Flat File Source.Outputs[Flat File Source Output].Columns[PeriodEndDateStr]"
+                              codePage="1252"
+                              dataType="str"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\stmt file loop\load data move files\load stmt to staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[PeriodEndDateStr]"
+                              length="15"
+                              lineageId="Package\stmt file loop\load data move files\load stmt to staging\Flat File Source.Outputs[Flat File Source Output].Columns[PeriodEndDateStr]"
+                              name="PeriodEndDateStr"
+                              truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                                  name="FastParse">false</property>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the data is in binary format."
+                                  name="UseBinaryFormat">false</property>
+                              </properties>
+                            </outputColumn>
+                            <outputColumn
+                              refId="Package\stmt file loop\load data move files\load stmt to staging\Flat File Source.Outputs[Flat File Source Output].Columns[AccountStr]"
+                              codePage="1252"
+                              dataType="str"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\stmt file loop\load data move files\load stmt to staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[AccountStr]"
+                              length="100"
+                              lineageId="Package\stmt file loop\load data move files\load stmt to staging\Flat File Source.Outputs[Flat File Source Output].Columns[AccountStr]"
+                              name="AccountStr"
+                              truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                                  name="FastParse">false</property>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the data is in binary format."
+                                  name="UseBinaryFormat">false</property>
+                              </properties>
+                            </outputColumn>
+                            <outputColumn
+                              refId="Package\stmt file loop\load data move files\load stmt to staging\Flat File Source.Outputs[Flat File Source Output].Columns[SubAccountStr]"
+                              codePage="1252"
+                              dataType="str"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\stmt file loop\load data move files\load stmt to staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[SubAccountStr]"
+                              length="100"
+                              lineageId="Package\stmt file loop\load data move files\load stmt to staging\Flat File Source.Outputs[Flat File Source Output].Columns[SubAccountStr]"
+                              name="SubAccountStr"
+                              truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                                  name="FastParse">false</property>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the data is in binary format."
+                                  name="UseBinaryFormat">false</property>
+                              </properties>
+                            </outputColumn>
+                            <outputColumn
+                              refId="Package\stmt file loop\load data move files\load stmt to staging\Flat File Source.Outputs[Flat File Source Output].Columns[ValueStr]"
+                              codePage="1252"
+                              dataType="str"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\stmt file loop\load data move files\load stmt to staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[ValueStr]"
+                              length="16"
+                              lineageId="Package\stmt file loop\load data move files\load stmt to staging\Flat File Source.Outputs[Flat File Source Output].Columns[ValueStr]"
+                              name="ValueStr"
+                              truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                                  name="FastParse">false</property>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the data is in binary format."
+                                  name="UseBinaryFormat">false</property>
+                              </properties>
+                            </outputColumn>
+                          </outputColumns>
+                          <externalMetadataColumns
+                            isUsed="True">
+                            <externalMetadataColumn
+                              refId="Package\stmt file loop\load data move files\load stmt to staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[import_path]"
+                              codePage="1252"
+                              dataType="str"
+                              length="255"
+                              name="import_path" />
+                            <externalMetadataColumn
+                              refId="Package\stmt file loop\load data move files\load stmt to staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[CIDStr]"
+                              codePage="1252"
+                              dataType="str"
+                              length="16"
+                              name="CIDStr" />
+                            <externalMetadataColumn
+                              refId="Package\stmt file loop\load data move files\load stmt to staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[StatementIDStr]"
+                              codePage="1252"
+                              dataType="str"
+                              length="1"
+                              name="StatementIDStr" />
+                            <externalMetadataColumn
+                              refId="Package\stmt file loop\load data move files\load stmt to staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[download_date]"
+                              codePage="1252"
+                              dataType="str"
+                              length="50"
+                              name="download_date" />
+                            <externalMetadataColumn
+                              refId="Package\stmt file loop\load data move files\load stmt to staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[FiscalQuarterStr]"
+                              codePage="1252"
+                              dataType="str"
+                              length="1"
+                              name="FiscalQuarterStr" />
+                            <externalMetadataColumn
+                              refId="Package\stmt file loop\load data move files\load stmt to staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[PeriodEndDateStr]"
+                              codePage="1252"
+                              dataType="str"
+                              length="15"
+                              name="PeriodEndDateStr" />
+                            <externalMetadataColumn
+                              refId="Package\stmt file loop\load data move files\load stmt to staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[AccountStr]"
+                              codePage="1252"
+                              dataType="str"
+                              length="100"
+                              name="AccountStr" />
+                            <externalMetadataColumn
+                              refId="Package\stmt file loop\load data move files\load stmt to staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[SubAccountStr]"
+                              codePage="1252"
+                              dataType="str"
+                              length="100"
+                              name="SubAccountStr" />
+                            <externalMetadataColumn
+                              refId="Package\stmt file loop\load data move files\load stmt to staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[ValueStr]"
+                              codePage="1252"
+                              dataType="str"
+                              length="16"
+                              name="ValueStr" />
+                          </externalMetadataColumns>
+                        </output>
+                        <output
+                          refId="Package\stmt file loop\load data move files\load stmt to staging\Flat File Source.Outputs[Flat File Source Error Output]"
+                          isErrorOut="true"
+                          name="Flat File Source Error Output">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\stmt file loop\load data move files\load stmt to staging\Flat File Source.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                              codePage="1252"
+                              dataType="text"
+                              description="Flat File Source Error Output Column"
+                              lineageId="Package\stmt file loop\load data move files\load stmt to staging\Flat File Source.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                              name="Flat File Source Error Output Column" />
+                            <outputColumn
+                              refId="Package\stmt file loop\load data move files\load stmt to staging\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                              dataType="i4"
+                              lineageId="Package\stmt file loop\load data move files\load stmt to staging\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                              name="ErrorCode"
+                              specialFlags="1" />
+                            <outputColumn
+                              refId="Package\stmt file loop\load data move files\load stmt to staging\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                              dataType="i4"
+                              lineageId="Package\stmt file loop\load data move files\load stmt to staging\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                              name="ErrorColumn"
+                              specialFlags="2" />
+                          </outputColumns>
+                          <externalMetadataColumns />
+                        </output>
+                      </outputs>
+                    </component>
+                    <component
+                      refId="Package\stmt file loop\load data move files\load stmt to staging\import date"
+                      componentClassID="{49928E82-9C4E-49F0-AABE-3812B82707EC}"
+                      contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                      description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+                      name="import date"
+                      usesDispositions="true">
+                      <inputs>
+                        <input
+                          refId="Package\stmt file loop\load data move files\load stmt to staging\import date.Inputs[Derived Column Input]"
+                          description="Input to the Derived Column Transformation"
+                          name="Derived Column Input">
+                          <externalMetadataColumns />
+                        </input>
+                      </inputs>
+                      <outputs>
+                        <output
+                          refId="Package\stmt file loop\load data move files\load stmt to staging\import date.Outputs[Derived Column Output]"
+                          description="Default Output of the Derived Column Transformation"
+                          exclusionGroup="1"
+                          name="Derived Column Output"
+                          synchronousInputId="Package\stmt file loop\load data move files\load stmt to staging\import date.Inputs[Derived Column Input]">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\stmt file loop\load data move files\load stmt to staging\import date.Outputs[Derived Column Output].Columns[import_date]"
+                              dataType="dbTimeStamp"
+                              errorOrTruncationOperation="Computation"
+                              errorRowDisposition="FailComponent"
+                              lineageId="Package\stmt file loop\load data move files\load stmt to staging\import date.Outputs[Derived Column Output].Columns[import_date]"
+                              name="import_date"
+                              truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property
+                                  containsID="true"
+                                  dataType="System.String"
+                                  description="Derived Column Expression"
+                                  name="Expression">[GETDATE]()</property>
+                                <property
+                                  containsID="true"
+                                  dataType="System.String"
+                                  description="Derived Column Friendly Expression"
+                                  expressionType="Notify"
+                                  name="FriendlyExpression">GETDATE()</property>
+                              </properties>
+                            </outputColumn>
+                          </outputColumns>
+                          <externalMetadataColumns />
+                        </output>
+                        <output
+                          refId="Package\stmt file loop\load data move files\load stmt to staging\import date.Outputs[Derived Column Error Output]"
+                          description="Error Output of the Derived Column Transformation"
+                          exclusionGroup="1"
+                          isErrorOut="true"
+                          name="Derived Column Error Output"
+                          synchronousInputId="Package\stmt file loop\load data move files\load stmt to staging\import date.Inputs[Derived Column Input]">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\stmt file loop\load data move files\load stmt to staging\import date.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                              dataType="i4"
+                              lineageId="Package\stmt file loop\load data move files\load stmt to staging\import date.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                              name="ErrorCode"
+                              specialFlags="1" />
+                            <outputColumn
+                              refId="Package\stmt file loop\load data move files\load stmt to staging\import date.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                              dataType="i4"
+                              lineageId="Package\stmt file loop\load data move files\load stmt to staging\import date.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                              name="ErrorColumn"
+                              specialFlags="2" />
+                          </outputColumns>
+                          <externalMetadataColumns />
+                        </output>
+                      </outputs>
+                    </component>
+                    <component
+                      refId="Package\stmt file loop\load data move files\load stmt to staging\staging statement"
+                      componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+                      contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                      description="OLE DB Destination"
+                      name="staging statement"
+                      usesDispositions="true"
+                      version="4">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                          name="CommandTimeout">0</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the name of the database object used to open a rowset."
+                          name="OpenRowset">[staging].[Statement]</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the variable that contains the name of the database object used to open a rowset."
+                          name="OpenRowsetVariable"></property>
+                        <property
+                          dataType="System.String"
+                          description="The SQL command to be executed."
+                          name="SqlCommand"
+                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the column code page to use when code page information is unavailable from the data source."
+                          name="DefaultCodePage">1252</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Forces the use of the DefaultCodePage property value when describing character data."
+                          name="AlwaysUseDefaultCodePage">false</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the mode used to access the database."
+                          name="AccessMode"
+                          typeConverter="AccessMode">3</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                          name="FastLoadKeepIdentity">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                          name="FastLoadKeepNulls">false</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                          name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                          name="FastLoadMaxInsertCommitSize">2147483647</property>
+                      </properties>
+                      <connections>
+                        <connection
+                          refId="Package\stmt file loop\load data move files\load stmt to staging\staging statement.Connections[OleDbConnection]"
+                          connectionManagerID="Package.ConnectionManagers[FinDW]"
+                          connectionManagerRefId="Package.ConnectionManagers[FinDW]"
+                          description="The OLE DB runtime connection used to access the database."
+                          name="OleDbConnection" />
+                      </connections>
+                      <inputs>
+                        <input
+                          refId="Package\stmt file loop\load data move files\load stmt to staging\staging statement.Inputs[OLE DB Destination Input]"
+                          errorOrTruncationOperation="Insert"
+                          errorRowDisposition="FailComponent"
+                          hasSideEffects="true"
+                          name="OLE DB Destination Input">
+                          <inputColumns>
+                            <inputColumn
+                              refId="Package\stmt file loop\load data move files\load stmt to staging\staging statement.Inputs[OLE DB Destination Input].Columns[import_path]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="255"
+                              cachedName="import_path"
+                              externalMetadataColumnId="Package\stmt file loop\load data move files\load stmt to staging\staging statement.Inputs[OLE DB Destination Input].ExternalColumns[import_path]"
+                              lineageId="Package\stmt file loop\load data move files\load stmt to staging\Flat File Source.Outputs[Flat File Source Output].Columns[import_path]" />
+                            <inputColumn
+                              refId="Package\stmt file loop\load data move files\load stmt to staging\staging statement.Inputs[OLE DB Destination Input].Columns[CIDStr]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="16"
+                              cachedName="CIDStr"
+                              externalMetadataColumnId="Package\stmt file loop\load data move files\load stmt to staging\staging statement.Inputs[OLE DB Destination Input].ExternalColumns[CIDStr]"
+                              lineageId="Package\stmt file loop\load data move files\load stmt to staging\Flat File Source.Outputs[Flat File Source Output].Columns[CIDStr]" />
+                            <inputColumn
+                              refId="Package\stmt file loop\load data move files\load stmt to staging\staging statement.Inputs[OLE DB Destination Input].Columns[StatementIDStr]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="1"
+                              cachedName="StatementIDStr"
+                              externalMetadataColumnId="Package\stmt file loop\load data move files\load stmt to staging\staging statement.Inputs[OLE DB Destination Input].ExternalColumns[StatementIDStr]"
+                              lineageId="Package\stmt file loop\load data move files\load stmt to staging\Flat File Source.Outputs[Flat File Source Output].Columns[StatementIDStr]" />
+                            <inputColumn
+                              refId="Package\stmt file loop\load data move files\load stmt to staging\staging statement.Inputs[OLE DB Destination Input].Columns[download_date]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="50"
+                              cachedName="download_date"
+                              externalMetadataColumnId="Package\stmt file loop\load data move files\load stmt to staging\staging statement.Inputs[OLE DB Destination Input].ExternalColumns[download_date]"
+                              lineageId="Package\stmt file loop\load data move files\load stmt to staging\Flat File Source.Outputs[Flat File Source Output].Columns[download_date]" />
+                            <inputColumn
+                              refId="Package\stmt file loop\load data move files\load stmt to staging\staging statement.Inputs[OLE DB Destination Input].Columns[FiscalQuarterStr]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="1"
+                              cachedName="FiscalQuarterStr"
+                              externalMetadataColumnId="Package\stmt file loop\load data move files\load stmt to staging\staging statement.Inputs[OLE DB Destination Input].ExternalColumns[FiscalQuarterStr]"
+                              lineageId="Package\stmt file loop\load data move files\load stmt to staging\Flat File Source.Outputs[Flat File Source Output].Columns[FiscalQuarterStr]" />
+                            <inputColumn
+                              refId="Package\stmt file loop\load data move files\load stmt to staging\staging statement.Inputs[OLE DB Destination Input].Columns[PeriodEndDateStr]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="15"
+                              cachedName="PeriodEndDateStr"
+                              externalMetadataColumnId="Package\stmt file loop\load data move files\load stmt to staging\staging statement.Inputs[OLE DB Destination Input].ExternalColumns[PeriodEndDateStr]"
+                              lineageId="Package\stmt file loop\load data move files\load stmt to staging\Flat File Source.Outputs[Flat File Source Output].Columns[PeriodEndDateStr]" />
+                            <inputColumn
+                              refId="Package\stmt file loop\load data move files\load stmt to staging\staging statement.Inputs[OLE DB Destination Input].Columns[AccountStr]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="100"
+                              cachedName="AccountStr"
+                              externalMetadataColumnId="Package\stmt file loop\load data move files\load stmt to staging\staging statement.Inputs[OLE DB Destination Input].ExternalColumns[AccountStr]"
+                              lineageId="Package\stmt file loop\load data move files\load stmt to staging\Flat File Source.Outputs[Flat File Source Output].Columns[AccountStr]" />
+                            <inputColumn
+                              refId="Package\stmt file loop\load data move files\load stmt to staging\staging statement.Inputs[OLE DB Destination Input].Columns[SubAccountStr]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="100"
+                              cachedName="SubAccountStr"
+                              externalMetadataColumnId="Package\stmt file loop\load data move files\load stmt to staging\staging statement.Inputs[OLE DB Destination Input].ExternalColumns[SubAccountStr]"
+                              lineageId="Package\stmt file loop\load data move files\load stmt to staging\Flat File Source.Outputs[Flat File Source Output].Columns[SubAccountStr]" />
+                            <inputColumn
+                              refId="Package\stmt file loop\load data move files\load stmt to staging\staging statement.Inputs[OLE DB Destination Input].Columns[ValueStr]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="16"
+                              cachedName="ValueStr"
+                              externalMetadataColumnId="Package\stmt file loop\load data move files\load stmt to staging\staging statement.Inputs[OLE DB Destination Input].ExternalColumns[ValueStr]"
+                              lineageId="Package\stmt file loop\load data move files\load stmt to staging\Flat File Source.Outputs[Flat File Source Output].Columns[ValueStr]" />
+                            <inputColumn
+                              refId="Package\stmt file loop\load data move files\load stmt to staging\staging statement.Inputs[OLE DB Destination Input].Columns[import_date]"
+                              cachedDataType="dbTimeStamp"
+                              cachedName="import_date"
+                              externalMetadataColumnId="Package\stmt file loop\load data move files\load stmt to staging\staging statement.Inputs[OLE DB Destination Input].ExternalColumns[import_date]"
+                              lineageId="Package\stmt file loop\load data move files\load stmt to staging\import date.Outputs[Derived Column Output].Columns[import_date]" />
+                          </inputColumns>
+                          <externalMetadataColumns
+                            isUsed="True">
+                            <externalMetadataColumn
+                              refId="Package\stmt file loop\load data move files\load stmt to staging\staging statement.Inputs[OLE DB Destination Input].ExternalColumns[import_path]"
+                              codePage="1252"
+                              dataType="str"
+                              length="260"
+                              name="import_path" />
+                            <externalMetadataColumn
+                              refId="Package\stmt file loop\load data move files\load stmt to staging\staging statement.Inputs[OLE DB Destination Input].ExternalColumns[download_date]"
+                              dataType="dbDate"
+                              name="download_date" />
+                            <externalMetadataColumn
+                              refId="Package\stmt file loop\load data move files\load stmt to staging\staging statement.Inputs[OLE DB Destination Input].ExternalColumns[CIDStr]"
+                              codePage="1252"
+                              dataType="str"
+                              length="16"
+                              name="CIDStr" />
+                            <externalMetadataColumn
+                              refId="Package\stmt file loop\load data move files\load stmt to staging\staging statement.Inputs[OLE DB Destination Input].ExternalColumns[PeriodEndDateStr]"
+                              codePage="1252"
+                              dataType="str"
+                              length="16"
+                              name="PeriodEndDateStr" />
+                            <externalMetadataColumn
+                              refId="Package\stmt file loop\load data move files\load stmt to staging\staging statement.Inputs[OLE DB Destination Input].ExternalColumns[FiscalQuarterStr]"
+                              codePage="1252"
+                              dataType="str"
+                              length="1"
+                              name="FiscalQuarterStr" />
+                            <externalMetadataColumn
+                              refId="Package\stmt file loop\load data move files\load stmt to staging\staging statement.Inputs[OLE DB Destination Input].ExternalColumns[StatementIDStr]"
+                              codePage="1252"
+                              dataType="str"
+                              length="1"
+                              name="StatementIDStr" />
+                            <externalMetadataColumn
+                              refId="Package\stmt file loop\load data move files\load stmt to staging\staging statement.Inputs[OLE DB Destination Input].ExternalColumns[AccountStr]"
+                              codePage="1252"
+                              dataType="str"
+                              length="100"
+                              name="AccountStr" />
+                            <externalMetadataColumn
+                              refId="Package\stmt file loop\load data move files\load stmt to staging\staging statement.Inputs[OLE DB Destination Input].ExternalColumns[SubAccountStr]"
+                              codePage="1252"
+                              dataType="str"
+                              length="100"
+                              name="SubAccountStr" />
+                            <externalMetadataColumn
+                              refId="Package\stmt file loop\load data move files\load stmt to staging\staging statement.Inputs[OLE DB Destination Input].ExternalColumns[ValueStr]"
+                              codePage="1252"
+                              dataType="str"
+                              length="16"
+                              name="ValueStr" />
+                            <externalMetadataColumn
+                              refId="Package\stmt file loop\load data move files\load stmt to staging\staging statement.Inputs[OLE DB Destination Input].ExternalColumns[CID]"
+                              dataType="i8"
+                              name="CID" />
+                            <externalMetadataColumn
+                              refId="Package\stmt file loop\load data move files\load stmt to staging\staging statement.Inputs[OLE DB Destination Input].ExternalColumns[PeriodEndDate]"
+                              dataType="dbDate"
+                              name="PeriodEndDate" />
+                            <externalMetadataColumn
+                              refId="Package\stmt file loop\load data move files\load stmt to staging\staging statement.Inputs[OLE DB Destination Input].ExternalColumns[FiscalQuarter]"
+                              dataType="ui1"
+                              name="FiscalQuarter" />
+                            <externalMetadataColumn
+                              refId="Package\stmt file loop\load data move files\load stmt to staging\staging statement.Inputs[OLE DB Destination Input].ExternalColumns[StatementID]"
+                              dataType="ui1"
+                              name="StatementID" />
+                            <externalMetadataColumn
+                              refId="Package\stmt file loop\load data move files\load stmt to staging\staging statement.Inputs[OLE DB Destination Input].ExternalColumns[AccountID]"
+                              dataType="ui1"
+                              name="AccountID" />
+                            <externalMetadataColumn
+                              refId="Package\stmt file loop\load data move files\load stmt to staging\staging statement.Inputs[OLE DB Destination Input].ExternalColumns[SubAccountID]"
+                              dataType="ui1"
+                              name="SubAccountID" />
+                            <externalMetadataColumn
+                              refId="Package\stmt file loop\load data move files\load stmt to staging\staging statement.Inputs[OLE DB Destination Input].ExternalColumns[Value]"
+                              dataType="i8"
+                              name="Value" />
+                            <externalMetadataColumn
+                              refId="Package\stmt file loop\load data move files\load stmt to staging\staging statement.Inputs[OLE DB Destination Input].ExternalColumns[import_date]"
+                              dataType="dbDate"
+                              name="import_date" />
+                          </externalMetadataColumns>
+                        </input>
+                      </inputs>
+                      <outputs>
+                        <output
+                          refId="Package\stmt file loop\load data move files\load stmt to staging\staging statement.Outputs[OLE DB Destination Error Output]"
+                          exclusionGroup="1"
+                          isErrorOut="true"
+                          name="OLE DB Destination Error Output"
+                          synchronousInputId="Package\stmt file loop\load data move files\load stmt to staging\staging statement.Inputs[OLE DB Destination Input]">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\stmt file loop\load data move files\load stmt to staging\staging statement.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                              dataType="i4"
+                              lineageId="Package\stmt file loop\load data move files\load stmt to staging\staging statement.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                              name="ErrorCode"
+                              specialFlags="1" />
+                            <outputColumn
+                              refId="Package\stmt file loop\load data move files\load stmt to staging\staging statement.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                              dataType="i4"
+                              lineageId="Package\stmt file loop\load data move files\load stmt to staging\staging statement.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                              name="ErrorColumn"
+                              specialFlags="2" />
+                          </outputColumns>
+                          <externalMetadataColumns />
+                        </output>
+                      </outputs>
+                    </component>
+                  </components>
+                  <paths>
+                    <path
+                      refId="Package\stmt file loop\load data move files\load stmt to staging.Paths[Derived Column Output]"
+                      endId="Package\stmt file loop\load data move files\load stmt to staging\staging statement.Inputs[OLE DB Destination Input]"
+                      name="Derived Column Output"
+                      startId="Package\stmt file loop\load data move files\load stmt to staging\import date.Outputs[Derived Column Output]" />
+                    <path
+                      refId="Package\stmt file loop\load data move files\load stmt to staging.Paths[Flat File Source Output]"
+                      endId="Package\stmt file loop\load data move files\load stmt to staging\import date.Inputs[Derived Column Input]"
+                      name="Flat File Source Output"
+                      startId="Package\stmt file loop\load data move files\load stmt to staging\Flat File Source.Outputs[Flat File Source Output]" />
+                  </paths>
+                </pipeline>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\stmt file loop\load data move files\move completed file"
+              DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.FileSystemTask.FileSystemTask, Microsoft.SqlServer.FileSystemTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+              DTS:DelayValidation="True"
+              DTS:Description="File System Task"
+              DTS:DTSID="{316A6925-D0F1-4F31-B0BE-F218BC31AF63}"
+              DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.FileSystemTask.FileSystemTask, Microsoft.SqlServer.FileSystemTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="move completed file"
+              DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <FileSystemData
+                  TaskOperationType="RenameFile"
+                  TaskOverwriteDestFile="True"
+                  TaskSourcePath="User::flat_file_loading_path"
+                  TaskIsSourceVariable="True"
+                  TaskDestinationPath="User::flat_file_completed_path"
+                  TaskIsDestinationVariable="True" />
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+          <DTS:PrecedenceConstraints>
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\stmt file loop\load data move files.PrecedenceConstraints[Constraint]"
+              DTS:CreationName=""
+              DTS:DTSID="{A81FA3C2-EFE7-42FF-871B-1D8A9A7317BC}"
+              DTS:From="Package\stmt file loop\load data move files\load stmt to staging"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint"
+              DTS:To="Package\stmt file loop\load data move files\move completed file" />
+          </DTS:PrecedenceConstraints>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{1050BF04-BD55-48DB-B862-6F2C36C8822B}"
+          DTS:ObjectName="{1050BF04-BD55-48DB-B862-6F2C36C8822B}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::flat_file_name" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\truncate staging"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{8C56C889-FAAD-47A7-B473-5BDBAA5B323E}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="truncate staging"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9A87E336-1E4C-423F-A30F-D9F04CAADB74}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE staging.Statement" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{C845BE9C-A3F0-4B2E-A97D-E4B6F3B67E13}"
+      DTS:From="Package\truncate staging"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\stmt file loop" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="172.8,41.6"
+          Id="Package\stmt file loop\load data move files\load stmt to staging"
+          TopLeft="20.3571431101585,31.1941180074091" />
+        <EdgeLayout
+          Id="Package\stmt file loop\load data move files.PrecedenceConstraints[Constraint]"
+          TopLeft="108.300000272478,72.7941180074091">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,36.7529415797197"
+              Start="0,0"
+              End="0,29.2529415797197">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.2529415797197" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="174.4,41.6"
+          Id="Package\stmt file loop\load data move files\move completed file"
+          TopLeft="22.6428574347983,109.547059587129" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="204.8,206.4"
+          Size="204.8,249.6"
+          Id="Package\stmt file loop\load data move files"
+          TopLeft="116.571433281412,106.541179053099" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="468.8,488"
+          Size="468.8,531.2"
+          Id="Package\stmt file loop"
+          TopLeft="145.142859614625,129.69411946597" />
+        <NodeLayout
+          Size="155.2,41.6"
+          Id="Package\truncate staging"
+          TopLeft="299.42857652781,65.1294122966516" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="378.285718071218,106.729412296652">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,22.9647071693184"
+              Start="0,0"
+              End="0,15.4647071693184">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.4647071693184" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\stmt file loop\load data move files\load stmt to staging">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="163.2,41.6"
+          Id="Package\stmt file loop\load data move files\load stmt to staging\staging statement"
+          TopLeft="277.714290443732,252.200003537009" />
+        <NodeLayout
+          Size="150.4,41.6"
+          Id="Package\stmt file loop\load data move files\load stmt to staging\Flat File Source"
+          TopLeft="286.857147742291,52.0000007292804" />
+        <NodeLayout
+          Size="132.8,41.6"
+          Id="Package\stmt file loop\load data move files\load stmt to staging\import date"
+          TopLeft="289.142862066931,157.835296331227" />
+        <EdgeLayout
+          Id="Package\stmt file loop\load data move files\load stmt to staging.Paths[Flat File Source Output]"
+          TopLeft="358.800004904611,93.6000007292804">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,64.2352956019471"
+              Start="0,0"
+              End="0,56.7352956019471">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,56.7352956019471" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\stmt file loop\load data move files\load stmt to staging.Paths[Derived Column Output]"
+          TopLeft="357.428576255331,199.435296331227">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,52.7647072057819"
+              Start="0,0"
+              End="0,45.2647072057819">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,45.2647072057819" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\stmt file loop\load data move files\load stmt to staging\staging statement">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

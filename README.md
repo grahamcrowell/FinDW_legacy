@@ -9,8 +9,10 @@ Data Warehouse for financial statement data and stock prices
 
 ### data flow
 - raw html is downloaded
-	[ ] python querys SSISDB to get list of spec (cid, period count) tuples
+	- [ ] python querys io_task table to get list of spec (cid, period count) tuples
 - html is parsed into csv
+	- [ ] python parses all html in parsing folder
 - csv is loaded into staging schema
-- 
+	- [ ] SSIS loads csv
+	- [ ] SSIS moves files to completed or failed folders
 

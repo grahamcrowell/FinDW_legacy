@@ -142,13 +142,14 @@ BEGIN
 PRINT 'create staging.Statement'
 CREATE TABLE staging.Statement(
 	import_path varchar(260) NOT NULL
+	,import_date date NULL
 	,download_date date NULL
 	,CIDStr varchar(16) NULL
 	,PeriodEndDateStr varchar(16) NULL
 	,FiscalQuarterStr varchar(1) NULL
 	,StatementIDStr varchar(1) NULL
-	,AccountStr varchar(64) NULL
-	,SubAccountStr varchar(64) NULL
+	,AccountStr varchar(100) NULL
+	,SubAccountStr varchar(100) NULL
 	,ValueStr varchar(16) NULL
 
 	,CID bigint NULL
@@ -158,7 +159,7 @@ CREATE TABLE staging.Statement(
 	,AccountID tinyint NULL
 	,SubAccountID tinyint NULL
 	,Value bigint NULL
-	-- ,CONSTRAINT PK_stagingStatement_ PRIMARY KEY CLUSTERED (FactID)
+	-- ,CONSTRAINT PK_stagingStatement PRIMARY KEY CLUSTERED (FactID)
 	);
 END
 GO
