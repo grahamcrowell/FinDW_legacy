@@ -1,17 +1,17 @@
 USE FinDW
 GO
-
-IF EXISTS (SELECT * FROM sys.objects WHERE name = 'StatementLookup' and type = N'P')
+--EXISTS (SELECT * FROM sys.objects WHERE name = '[dbo].[StatmentLookup]' and type = N'P') OR 
+IF OBJECT_ID('sp_StatmentLookup','P') IS NOT NULL
 BEGIN
-	PRINT 'drop dbo.StatementLookup'
-	DROP PROCEDURE dbo.StatementLookup
+	PRINT 'drop dbo.		'
+	DROP PROCEDURE [dbo].sp_StatmentLookup
 END	
 GO
 
 PRINT 'create StatementLookup'
 GO
 
-CREATE PROCEDURE dbo.StatmentLookup 
+CREATE PROCEDURE dbo.sp_StatmentLookup 
 AS
 BEGIN
 	UPDATE FinDW.staging.Statement SET CID = CAST(CIDStr AS int);
@@ -36,16 +36,16 @@ BEGIN
 END
 GO
 
-IF OBJECT_ID('StatementFactLoad','P') IS NOT NULL
+IF OBJECT_ID('sp_StatementFactLoad','P') IS NOT NULL
 BEGIN
-	PRINT 'drop dbo.StatementFactLoad'
-	DROP PROCEDURE dbo.StatementFactLoad
+	PRINT 'drop dbo.sp_StatementFactLoad'
+	DROP PROCEDURE dbo.sp_StatementFactLoad
 END	
 GO
 
-PRINT 'create StatementFactLoad'
+PRINT 'create sp_StatementFactLoad'
 GO
-CREATE PROCEDURE dbo.StatementFactLoad
+CREATE PROCEDURE dbo.sp_StatementFactLoad
 AS
 BEGIN
 

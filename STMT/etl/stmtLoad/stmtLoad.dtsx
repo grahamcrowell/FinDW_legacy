@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="stmtLoad"
   DTS:PackageType="5"
-  DTS:VersionBuild="36"
-  DTS:VersionGUID="{502D9A84-DC49-481F-8ABE-F15F72006D39}">
+  DTS:VersionBuild="37"
+  DTS:VersionGUID="{259C0853-AAD4-4ADB-A98C-5FCD605DE9B4}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -216,6 +216,41 @@
         <ExecuteProcessData
           Executable="C:\Python34\python.exe"
           Arguments="C:\GitHub\FinDW\stmt\py\task_master.py" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\sp_StatementLookip"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{D44EAD4A-16F6-46F3-8421-13BF09FD1657}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="sp_StatementLookip"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9A87E336-1E4C-423F-A30F-D9F04CAADB74}"
+          SQLTask:BypassPrepare="False"
+          SQLTask:SqlStatementSource="EXEC dbo.sp_StatmentLookup" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\sp_StatmentFactLoad"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{A906F017-7950-406B-87C5-B9E2D8CE2EC3}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="sp_StatmentFactLoad"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9A87E336-1E4C-423F-A30F-D9F04CAADB74}"
+          SQLTask:SqlStatementSource="EXEC dbo.sp_StatementFactLoad" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -1023,6 +1058,22 @@
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 1"
       DTS:To="Package\truncate staging" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{80ADBE55-F09B-4EAA-90D1-2578984EB596}"
+      DTS:From="Package\stmt file loop"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\sp_StatementLookip" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{251CB3D8-7AF1-400D-B5D3-6DBEFDD7C64D}"
+      DTS:From="Package\sp_StatementLookip"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\sp_StatmentFactLoad" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
@@ -1036,6 +1087,10 @@
     <LayoutInfo>
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="232,41.6"
+          Id="Package\download and parse with python"
+          TopLeft="277.131977522269,377.409525129174" />
         <NodeLayout
           Size="172.8,41.6"
           Id="Package\stmt file loop\load data move files\load stmt to staging"
@@ -1072,32 +1127,54 @@
           PanelSize="204.8,206.4"
           Size="204.8,249.6"
           Id="Package\stmt file loop\load data move files"
-          TopLeft="116.571433281412,106.541179053099" />
+          TopLeft="49.3605477830758,28.8605039957664" />
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="468.8,488"
-          Size="468.8,531.2"
+          PanelSize="293.6,333.6"
+          Size="293.6,376.8"
           Id="Package\stmt file loop"
-          TopLeft="145.142859614625,143.247060753978" />
+          TopLeft="247.075498671017,533.842020858826" />
         <NodeLayout
           Size="155.2,41.6"
           Id="Package\truncate staging"
-          TopLeft="299.42857652781,78.6823535846592" />
+          TopLeft="315.714291090868,458.653783567766" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="378.285718071218,120.282353584659">
+          TopLeft="393.594894880943,500.253783567766">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,22.9647071693183"
+              EndConnector="0,33.5882372910594"
               Start="0,0"
-              End="0,15.4647071693183">
+              End="0,26.0882372910594">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,15.4647071693183" />
+                    End="0,26.0882372910594" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="393.223134306569,419.009525129174">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,39.6442584385921"
+              Start="0,0"
+              End="0,32.1442584385921">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32.1442584385921" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1107,23 +1184,49 @@
           </EdgeLayout.Labels>
         </EdgeLayout>
         <NodeLayout
-          Size="232,41.6"
-          Id="Package\download and parse with python"
-          TopLeft="267.200004564013,2.16470585661363" />
+          Size="192,41.6"
+          Id="Package\sp_StatementLookip"
+          TopLeft="301.850345295998,957.754625545394" />
         <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="380.114290545911,43.7647058566136">
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="395.862921983508,910.642020858826">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,34.9176477280456"
+              EndConnector="0,47.1126046865684"
               Start="0,0"
-              End="0,27.4176477280456">
+              End="0,39.6126046865684">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,27.4176477280456" />
+                    End="0,39.6126046865684" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="179.2,41.6"
+          Id="Package\sp_StatmentFactLoad"
+          TopLeft="304.299324929541,1041.31765085353" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="395.874835112769,999.354625545394">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,41.9630253081386"
+              Start="0,0"
+              End="0,34.4630253081386">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.4630253081386" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
