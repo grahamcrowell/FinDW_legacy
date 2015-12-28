@@ -15,6 +15,5 @@ BEGIN
 		SET @dateid = CAST(CONVERT(varchar(8),@date, 112) AS int);
 		INSERT INTO dim.Date (DateID, Date) VALUES (@dateid, @date);
 		SET @date = DATEADD(day,1,@date);
-
 	END
 END

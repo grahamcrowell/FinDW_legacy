@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="stmtLoad"
   DTS:PackageType="5"
-  DTS:VersionBuild="32"
-  DTS:VersionGUID="{9FBCA585-E22A-4CC8-B59C-191C91AB09E7}">
+  DTS:VersionBuild="36"
+  DTS:VersionGUID="{502D9A84-DC49-481F-8ABE-F15F72006D39}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -201,6 +201,23 @@
     </DTS:Variable>
   </DTS:Variables>
   <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\download and parse with python"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteProcess.ExecuteProcess, Microsoft.SqlServer.ExecProcTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute Process Task"
+      DTS:DTSID="{88FE48A2-436B-4B6B-BF69-DF38C8FF6244}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteProcess.ExecuteProcess, Microsoft.SqlServer.ExecProcTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="download and parse with python"
+      DTS:TaskContact="Execute Process Task;Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExecuteProcessData
+          Executable="C:\Python34\python.exe"
+          Arguments="C:\GitHub\FinDW\stmt\py\task_master.py" />
+      </DTS:ObjectData>
+    </DTS:Executable>
     <DTS:Executable
       DTS:refId="Package\stmt file loop"
       DTS:CreationName="STOCK:FOREACHLOOP"
@@ -856,10 +873,6 @@
                               dataType="i8"
                               name="CID" />
                             <externalMetadataColumn
-                              refId="Package\stmt file loop\load data move files\load stmt to staging\staging statement.Inputs[OLE DB Destination Input].ExternalColumns[PeriodEndDate]"
-                              dataType="dbDate"
-                              name="PeriodEndDate" />
-                            <externalMetadataColumn
                               refId="Package\stmt file loop\load data move files\load stmt to staging\staging statement.Inputs[OLE DB Destination Input].ExternalColumns[FiscalQuarter]"
                               dataType="ui1"
                               name="FiscalQuarter" />
@@ -883,6 +896,10 @@
                               refId="Package\stmt file loop\load data move files\load stmt to staging\staging statement.Inputs[OLE DB Destination Input].ExternalColumns[import_date]"
                               dataType="dbDate"
                               name="import_date" />
+                            <externalMetadataColumn
+                              refId="Package\stmt file loop\load data move files\load stmt to staging\staging statement.Inputs[OLE DB Destination Input].ExternalColumns[PeriodEndDateID]"
+                              dataType="i4"
+                              name="PeriodEndDateID" />
                           </externalMetadataColumns>
                         </input>
                       </inputs>
@@ -998,6 +1015,14 @@
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint"
       DTS:To="Package\stmt file loop" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{715AEF87-2065-45C3-8581-199AA30BF755}"
+      DTS:From="Package\download and parse with python"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\truncate staging" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
@@ -1010,7 +1035,7 @@
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="172.8,41.6"
           Id="Package\stmt file loop\load data move files\load stmt to staging"
@@ -1054,25 +1079,51 @@
           PanelSize="468.8,488"
           Size="468.8,531.2"
           Id="Package\stmt file loop"
-          TopLeft="145.142859614625,129.69411946597" />
+          TopLeft="145.142859614625,143.247060753978" />
         <NodeLayout
           Size="155.2,41.6"
           Id="Package\truncate staging"
-          TopLeft="299.42857652781,65.1294122966516" />
+          TopLeft="299.42857652781,78.6823535846592" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="378.285718071218,106.729412296652">
+          TopLeft="378.285718071218,120.282353584659">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,22.9647071693184"
+              EndConnector="0,22.9647071693183"
               Start="0,0"
-              End="0,15.4647071693184">
+              End="0,15.4647071693183">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,15.4647071693184" />
+                    End="0,15.4647071693183" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="232,41.6"
+          Id="Package\download and parse with python"
+          TopLeft="267.200004564013,2.16470585661363" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="380.114290545911,43.7647058566136">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,34.9176477280456"
+              Start="0,0"
+              End="0,27.4176477280456">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27.4176477280456" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1088,7 +1139,7 @@
     design-time-name="Package\stmt file loop\load data move files\load stmt to staging">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="132.8,41.6"
           Id="Package\stmt file loop\load data move files\load stmt to staging\import date"
@@ -1120,9 +1171,7 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -1144,9 +1193,7 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
