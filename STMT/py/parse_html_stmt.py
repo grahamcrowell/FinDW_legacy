@@ -6,7 +6,7 @@ out_dir = os.path.join(tools.data_root,'staging/stmt/csv')
 archive_dir = os.path.join(tools.data_root,'archive/stmt/html')
 
 def parse_stmt(path):
-	cid,per_cnt,stmt_code,download_date = tools.parse_stmt_filename(path)
+	cid,per_cnt,StatementIDStr,download_date = tools.parse_stmt_filename(path)
 	nul_html = '<p>There is no quarterly fundamental data for this company.'
 	qtr_html = '<td width="80" class="dkbluert"><b>'
 	fdt_html = '<td class="dkbluert" width="80">'
@@ -104,7 +104,7 @@ def parse_stmt(path):
 						line = line.replace(",","")
 						val = int(line)
 						# print(val)
-						tmp_elem = (path,cid,stmt_code,download_date,qtrs[index],fdts[index],act,sub,val)
+						tmp_elem = (path,cid,StatementIDStr,download_date,qtrs[index],fdts[index],act,sub,val)
 						if None in tmp_elem or '' in (qtrs[index],fdts[index],act,val):
 							print('ERROR: ')
 							print(tmp)
@@ -117,7 +117,7 @@ def parse_stmt(path):
 						index += 1
 
 				csv_path = tools.get_out_path(path,out_dir,'.csv')
-				header = ['import_path','CID','stmt_code','download_date','FiscalQuarter','PeriodEndDate','Account','SubAccount','Value']
+				header = ['import_path','CIDStr','StatementIDStr','download_date','FiscalQuarterStr','PeriodEndDateStr','AccountStr','SubAccountStr','ValueStr']
 				with open(csv_path,'w') as csv:
 					tmp_line = '{},{},{},{},{},{},{},{},{}\n'.format(*header)
 					csv.write(tmp_line)

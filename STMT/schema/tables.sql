@@ -39,7 +39,7 @@ PRINT 'create dim.Account'
 CREATE TABLE dim.Account(
 	AccountID int IDENTITY(0,1)
 	,AccountName varchar(64) NOT NULL
-	,CONSTRAINT PK_Account PRIMARY KEY CLUSTERED (AccountID ASC)
+	,CONSTRAINT PK_dimAccount PRIMARY KEY CLUSTERED (AccountID ASC)
 	);
 	INSERT INTO dim.Account VALUES ('Invalid');
 END
@@ -58,7 +58,7 @@ PRINT 'create dim.SubAccount'
 CREATE TABLE dim.SubAccount(
 	SubAccountID int IDENTITY(0,1)
 	,SubAccountName varchar(64) NOT NULL
-	,CONSTRAINT PK_SubAccount PRIMARY KEY CLUSTERED (SubAccountID ASC)
+	,CONSTRAINT PK_dimSubAccount PRIMARY KEY CLUSTERED (SubAccountID ASC)
 	-- ,CONSTRAINT FK_SubAccount_SubAccount FOREIGN KEY (SubAccountID) REFERENCES dim.Account (AccountID) 
 	);
 	INSERT INTO dim.SubAccount VALUES ('Invalid');
@@ -78,7 +78,7 @@ PRINT 'create dim.Statement'
 CREATE TABLE dim.Statement(
 	StatementID int IDENTITY(0,1)
 	,StatementName varchar(64) NOT NULL
-	,CONSTRAINT PK_Statement PRIMARY KEY CLUSTERED (StatementID ASC)
+	,CONSTRAINT PK_dimStatement PRIMARY KEY CLUSTERED (StatementID ASC)
 	);
 	INSERT INTO dim.Statement VALUES ('Invalid');
 END
@@ -99,7 +99,7 @@ CREATE TABLE dim.Stock(
 	,StockName varchar(64) NOT NULL
 	,Symbol varchar(64) NOT NULL
 	,CID int NULL
-	,CONSTRAINT PK_Stock PRIMARY KEY CLUSTERED (StockID ASC)
+	,CONSTRAINT PK_dimStock PRIMARY KEY CLUSTERED (StockID ASC)
 	);
 	INSERT INTO dim.Stock (StockName,Symbol) VALUES ('Invalid','Invalid');
 END
@@ -125,6 +125,41 @@ CREATE TABLE Statement(
 	,AccountID int NULL
 	,SubAccountID int NULL
 	,Value bigint NOT NULL
-	,CONSTRAINT PK_Statement_FactID PRIMARY KEY CLUSTERED (FactID))
+	,CONSTRAINT PK_Statement PRIMARY KEY CLUSTERED (FactID)
+	);
 END
 GO
+
+
+IF OBJECT_ID('staging.Statement') IS NOT NULL
+BEGIN
+	PRINT 'drop staging.Statement'
+	DROP TABLE staging.Statement;
+END
+GO
+
+BEGIN
+PRINT 'create staging.Statement'
+CREATE TABLE staging.Statement(
+	import_path varchar(260) NOT NULL
+	,download_date date NULL
+	,CIDStr varchar(16) NULL
+	,PeriodEndDateStr varchar(16) NULL
+	,FiscalQuarterStr varchar(1) NULL
+	,StatementIDStr varchar(1) NULL
+	,AccountStr varchar(64) NULL
+	,SubAccountStr varchar(64) NULL
+	,ValueStr varchar(16) NULL
+
+	,CID bigint NULL
+	,PeriodEndDate date NULL
+	,FiscalQuarter tinyint NULL
+	,StatementID tinyint NULL
+	,AccountID tinyint NULL
+	,SubAccountID tinyint NULL
+	,Value bigint NULL
+	-- ,CONSTRAINT PK_stagingStatement_ PRIMARY KEY CLUSTERED (FactID)
+	);
+END
+GO
+
