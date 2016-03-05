@@ -22,7 +22,6 @@ CREATE TABLE dim.Date(
 	,isTradeDate bit NULL
 	,CONSTRAINT PK_Date PRIMARY KEY CLUSTERED (DateID ASC)
 	);
-	INSERT INTO dim.Date (DateID) VALUES (0);
 END
 GO
 
@@ -41,7 +40,6 @@ CREATE TABLE dim.Account(
 	,AccountName varchar(64) NOT NULL
 	,CONSTRAINT PK_dimAccount PRIMARY KEY CLUSTERED (AccountID ASC)
 	);
-	INSERT INTO dim.Account VALUES ('Invalid');
 END
 GO
 
@@ -61,7 +59,6 @@ CREATE TABLE dim.SubAccount(
 	,CONSTRAINT PK_dimSubAccount PRIMARY KEY CLUSTERED (SubAccountID ASC)
 	-- ,CONSTRAINT FK_SubAccount_SubAccount FOREIGN KEY (SubAccountID) REFERENCES dim.Account (AccountID) 
 	);
-	INSERT INTO dim.SubAccount VALUES ('Invalid');
 END
 GO
 
@@ -80,7 +77,6 @@ CREATE TABLE dim.Statement(
 	,StatementName varchar(64) NOT NULL
 	,CONSTRAINT PK_dimStatement PRIMARY KEY CLUSTERED (StatementID ASC)
 	);
-	INSERT INTO dim.Statement VALUES ('Invalid');
 END
 GO
 
@@ -116,13 +112,14 @@ GO
 BEGIN
 PRINT 'create Statement'
 CREATE TABLE Statement(
-	FactID bigint NOT NULL
+	--FactID AS dbo.getFactID(CID, PeriodEndDateID, StatementID, AccountID, SubAccountID) PERSISTED NOT NULL
+	FactID numeric(20,0)
 	,CID bigint NOT NULL
 	-- ,FiscalYear int NOT NULL
 	,FiscalQuarter smallint NOT NULL
 	,PeriodEndDateID int NOT NULL
 	,StatementID smallint NOT NULL
-	,AccountID int NULL
+	,AccountID int NOT NULL
 	,SubAccountID int NULL
 	,Value bigint NOT NULL
 	,CONSTRAINT PK_Statement PRIMARY KEY CLUSTERED (FactID)

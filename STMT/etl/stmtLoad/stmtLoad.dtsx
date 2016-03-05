@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="stmtLoad"
   DTS:PackageType="5"
-  DTS:VersionBuild="37"
-  DTS:VersionGUID="{259C0853-AAD4-4ADB-A98C-5FCD605DE9B4}">
+  DTS:VersionBuild="39"
+  DTS:VersionGUID="{FCB70F6F-A2D2-4519-ACF8-ECA84CAACAAB}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -205,6 +205,7 @@
       DTS:refId="Package\download and parse with python"
       DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteProcess.ExecuteProcess, Microsoft.SqlServer.ExecProcTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:Description="Execute Process Task"
+      DTS:Disabled="True"
       DTS:DTSID="{88FE48A2-436B-4B6B-BF69-DF38C8FF6244}"
       DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteProcess.ExecuteProcess, Microsoft.SqlServer.ExecProcTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:LocaleID="-1"
@@ -222,6 +223,7 @@
       DTS:refId="Package\sp_StatementLookip"
       DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:Description="Execute SQL Task"
+      DTS:Disabled="True"
       DTS:DTSID="{D44EAD4A-16F6-46F3-8421-13BF09FD1657}"
       DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:LocaleID="-1"
@@ -240,6 +242,7 @@
       DTS:refId="Package\sp_StatmentFactLoad"
       DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:Description="Execute SQL Task"
+      DTS:Disabled="True"
       DTS:DTSID="{A906F017-7950-406B-87C5-B9E2D8CE2EC3}"
       DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:LocaleID="-1"
@@ -1090,29 +1093,29 @@
         <NodeLayout
           Size="232,41.6"
           Id="Package\download and parse with python"
-          TopLeft="277.131977522269,377.409525129174" />
+          TopLeft="5.5,97.8697483771753" />
         <NodeLayout
           Size="172.8,41.6"
           Id="Package\stmt file loop\load data move files\load stmt to staging"
-          TopLeft="20.3571431101585,31.1941180074091" />
+          TopLeft="6.30000000000001,5.49999999999995" />
         <NodeLayout
           Size="174.4,41.6"
           Id="Package\stmt file loop\load data move files\move completed file"
-          TopLeft="22.6428574347983,109.547059587129" />
+          TopLeft="5.50000000000001,107.1" />
         <EdgeLayout
           Id="Package\stmt file loop\load data move files.PrecedenceConstraints[Constraint]"
-          TopLeft="108.300000272478,72.7941180074091">
+          TopLeft="92.7,47.1">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,36.7529415797197"
+              EndConnector="0,59.9999999999999"
               Start="0,0"
-              End="0,29.2529415797197">
+              End="0,52.4999999999999">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,29.2529415797197" />
+                    End="0,52.4999999999999" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1124,35 +1127,35 @@
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="204.8,206.4"
-          Size="204.8,249.6"
+          PanelSize="185.6,164.8"
+          Size="185.6,208"
           Id="Package\stmt file loop\load data move files"
-          TopLeft="49.3605477830758,28.8605039957664" />
+          TopLeft="5.50000000000004,5.50000000000003" />
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="293.6,333.6"
-          Size="293.6,376.8"
+          PanelSize="196.8,236.8"
+          Size="196.8,280"
           Id="Package\stmt file loop"
-          TopLeft="247.075498671017,533.842020858826" />
+          TopLeft="27.6714286492796,239.893276930963" />
         <NodeLayout
           Size="155.2,41.6"
           Id="Package\truncate staging"
-          TopLeft="315.714291090868,458.653783567766" />
+          TopLeft="48.1197802916427,165.587394960812" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="393.594894880943,500.253783567766">
+          TopLeft="125.895604470461,207.187394960812">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,33.5882372910594"
+              EndConnector="0,32.7058819701515"
               Start="0,0"
-              End="0,26.0882372910594">
+              End="0,25.2058819701515">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,26.0882372910594" />
+                    End="0,25.2058819701515" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1163,18 +1166,18 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="393.223134306569,419.009525129174">
+          TopLeft="123.609890145821,139.469748377175">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,39.6442584385921"
+              EndConnector="0,26.1176465836362"
               Start="0,0"
-              End="0,32.1442584385921">
+              End="0,18.6176465836362">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,32.1442584385921" />
+                    End="0,18.6176465836362" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1186,21 +1189,21 @@
         <NodeLayout
           Size="192,41.6"
           Id="Package\sp_StatementLookip"
-          TopLeft="301.850345295998,957.754625545394" />
+          TopLeft="24.7380952251202,548.316804901327" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="395.862921983508,910.642020858826">
+          TopLeft="123.4047619372,519.893276930963">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,47.1126046865684"
+              EndConnector="0,28.4235279703636"
               Start="0,0"
-              End="0,39.6126046865684">
+              End="0,20.9235279703636">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,39.6126046865684" />
+                    End="0,20.9235279703636" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1212,21 +1215,21 @@
         <NodeLayout
           Size="179.2,41.6"
           Id="Package\sp_StatmentFactLoad"
-          TopLeft="304.299324929541,1041.31765085353" />
+          TopLeft="33.04285716232,619.32856917822" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="395.874835112769,999.354625545394">
+          TopLeft="121.69047619372,589.916804901327">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,41.9630253081386"
+              EndConnector="0,29.4117642768936"
               Start="0,0"
-              End="0,34.4630253081386">
+              End="0,21.9117642768936">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,34.4630253081386" />
+                    End="0,21.9117642768936" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>

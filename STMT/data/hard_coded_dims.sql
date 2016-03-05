@@ -2,12 +2,13 @@ USE FinDW
 GO
 SET NOCOUNT ON;
 
-TRUNCATE TABLE dim.SubAccount;
+TRUNCATE TABLE dim.Statement;
 INSERT INTO dim.Statement VALUES ('Income Statement');
 INSERT INTO dim.Statement VALUES ('Balance Sheet');
 INSERT INTO dim.Statement VALUES ('Cash Flow');
 
 TRUNCATE TABLE dim.Account;
+INSERT INTO dim.Account VALUES ('Missing');
 INSERT INTO dim.Account VALUES ('Accounting Changes');
 INSERT INTO dim.Account VALUES ('Accumulated Amortization');
 INSERT INTO dim.Account VALUES ('Add''l income/expense items');
@@ -55,6 +56,7 @@ INSERT INTO dim.Account VALUES ('Total Revenue');
 INSERT INTO dim.Account VALUES ('Treasury Stock');
 
 TRUNCATE TABLE dim.SubAccount;
+INSERT INTO dim.SubAccount VALUES ('Missing');
 INSERT INTO dim.SubAccount VALUES ('Accounts Payable');
 INSERT INTO dim.SubAccount VALUES ('Accounts Receivable');
 INSERT INTO dim.SubAccount VALUES ('Capital Expenditures');
@@ -94,6 +96,7 @@ INSERT INTO dim.SubAccount VALUES ('Short Term Debt/Current Portion of Long Term
 INSERT INTO dim.SubAccount VALUES ('Short Term Investments');
 
 TRUNCATE TABLE dim.Stock;
+INSERT INTO dim.Stock (Symbol, StockName, CID) VALUES ('','Invalid',NULL);
 INSERT INTO dim.Stock (Symbol, StockName, CID) VALUES ('A','Agilent Technologies',8244);
 INSERT INTO dim.Stock (Symbol, StockName, CID) VALUES ('AA','Alcoa Inc',10803);
 INSERT INTO dim.Stock (Symbol, StockName, CID) VALUES ('AACC','Asset Accep Cap Corp',NULL);
