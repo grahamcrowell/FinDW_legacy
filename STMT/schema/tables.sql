@@ -141,6 +141,7 @@ CREATE TABLE staging.Statement(
 	import_path varchar(260) NOT NULL
 	,import_date date NULL
 	,download_date date NULL
+	
 	,CIDStr varchar(16) NULL
 	,PeriodEndDateStr varchar(16) NULL
 	,FiscalQuarterStr varchar(1) NULL

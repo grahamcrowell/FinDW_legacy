@@ -7,9 +7,13 @@ Data Warehouse for financial statement data and stock prices
 	- schema _sql database, schema, table, index creation scripts_
 	- etl _ssis etl projects_
 
+## C# and python interface
+download_html_stmt.py and parse_html_stmt.py called from C#
+python does not interface with database
+
 ### data flow
 - raw html is downloaded
-	- [ ] python querys io_task table to get list of spec (cid, period count) tuples
+	- [ ] python download and parse scripts called from C#
 - html is parsed into csv
 	- [ ] python parses all html in parsing folder
 - csv is loaded into staging schema

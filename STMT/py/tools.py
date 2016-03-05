@@ -1,15 +1,18 @@
 import os, inspect, time, datetime, shutil
 import requests, _mssql
 
+data_root = 'C:\\Users\\user\\data\\FinDW\\'
+
 def get_stmt_loading():
-	stmt_loading = None
-	conn = _mssql.connect(server='PC\\', user='PC\\user', password='2and2is5', database='SSISDB')
-	sql = "SELECT * FROM catalog.object_parameters WHERE parameter_name = 'data_src_dir'"
-	conn.execute_query(sql)
-	for row in conn:
-		print(row['parameter_name'],row['design_default_value'])
-		stmt_loading = str(row['design_default_value'].decode())
-	conn.close()
+	#stmt_loading = None
+	#conn = _mssql.connect(server='PC\\', user='PC\\user', password='2and2is5', database='SSISDB')
+	#sql = "SELECT * FROM catalog.object_parameters WHERE parameter_name = 'data_src_dir'"
+	#conn.execute_query(sql)
+	#for row in conn:
+	#	print(row['parameter_name'],row['design_default_value'])
+	#	stmt_loading = str(row['design_default_value'].decode())
+	#conn.close()
+	stmt_loading = os.path.join(data_root, 'CSV')
 	if not os.path.exists(stmt_loading):
 		os.mkdir(stmt_loading)
 	return stmt_loading
@@ -28,27 +31,29 @@ def get_stmt_loaded():
 	return stmt_loaded
 
 def get_stmt_html():
-	stmt_html = None
-	conn = _mssql.connect(server='PC\\', user='PC\\user', password='2and2is5', database='SSISDB')
-	sql = "SELECT * FROM catalog.object_parameters WHERE parameter_name = 'data_html_dir'"
-	conn.execute_query(sql)
-	for row in conn:
-		print(row['parameter_name'],row['design_default_value'])
-		stmt_html = str(row['design_default_value'].decode())
-	conn.close()
+	#stmt_html = None
+	#conn = _mssql.connect(server='PC\\', user='PC\\user', password='2and2is5', database='SSISDB')
+	#sql = "SELECT * FROM catalog.object_parameters WHERE parameter_name = 'data_html_dir'"
+	#conn.execute_query(sql)
+	#for row in conn:
+	#	print(row['parameter_name'],row['design_default_value'])
+	#	stmt_html = str(row['design_default_value'].decode())
+	#conn.close()
+	stmt_html = os.path.join(data_root, 'HTML')
 	if not os.path.exists(stmt_html):
 		os.mkdir(stmt_html)
 	return stmt_html
 
 def get_stmt_parsed():
-	stmt_parsed = None
-	conn = _mssql.connect(server='PC\\', user='PC\\user', password='2and2is5', database='SSISDB')
-	sql = "SELECT * FROM catalog.object_parameters WHERE parameter_name = 'data_parsed_dir'"
-	conn.execute_query(sql)
-	for row in conn:
-		print(row['parameter_name'],row['design_default_value'])
-		stmt_parsed = str(row['design_default_value'].decode())
-	conn.close()
+	#stmt_parsed = None
+	#conn = _mssql.connect(server='PC\\', user='PC\\user', password='2and2is5', database='SSISDB')
+	#sql = "SELECT * FROM catalog.object_parameters WHERE parameter_name = 'data_parsed_dir'"
+	#conn.execute_query(sql)
+	#for row in conn:
+	#	print(row['parameter_name'],row['design_default_value'])
+	#	stmt_parsed = str(row['design_default_value'].decode())
+	#conn.close()
+	stmt_parsed = os.path.join(data_root, 'SDA')
 	if not os.path.exists(stmt_parsed):
 		os.mkdir(stmt_parsed)
 	return stmt_parsed
@@ -67,9 +72,9 @@ def get_stmt_html_nodata():
 	return stmt_html_nodata
 
 stmt_loading = get_stmt_loading()
-stmt_loaded = get_stmt_loaded()
+#stmt_loaded = get_stmt_loaded()
 stmt_html = get_stmt_html()
-stmt_html_nodata = get_stmt_html_nodata()
+#stmt_html_nodata = get_stmt_html_nodata()
 stmt_parsed = get_stmt_parsed()
 
 def make_stmt_filename(cid,per_cnt,stmt_code,date_str=None):
