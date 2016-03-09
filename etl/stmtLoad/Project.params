@@ -8,7 +8,7 @@
       <SSIS:Property
         SSIS:Name="CreationName"></SSIS:Property>
       <SSIS:Property
-        SSIS:Name="Description"></SSIS:Property>
+        SSIS:Name="Description">name of SQL server</SSIS:Property>
       <SSIS:Property
         SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
       <SSIS:Property
@@ -22,14 +22,14 @@
     </SSIS:Properties>
   </SSIS:Parameter>
   <SSIS:Parameter
-    SSIS:Name="data_src_dir">
+    SSIS:Name="html_dir_name">
     <SSIS:Properties>
       <SSIS:Property
         SSIS:Name="ID">{78022cc5-24c8-40ab-aba4-ca47f37e97be}</SSIS:Property>
       <SSIS:Property
         SSIS:Name="CreationName"></SSIS:Property>
       <SSIS:Property
-        SSIS:Name="Description"></SSIS:Property>
+        SSIS:Name="Description">&lt;file_type&gt; folder name of *.html files in local file system</SSIS:Property>
       <SSIS:Property
         SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
       <SSIS:Property
@@ -37,20 +37,20 @@
       <SSIS:Property
         SSIS:Name="Sensitive">0</SSIS:Property>
       <SSIS:Property
-        SSIS:Name="Value">C:\Users\user\data\DEV\stmt\loading\</SSIS:Property>
+        SSIS:Name="Value">HTML</SSIS:Property>
       <SSIS:Property
         SSIS:Name="DataType">18</SSIS:Property>
     </SSIS:Properties>
   </SSIS:Parameter>
   <SSIS:Parameter
-    SSIS:Name="data_dst_dir">
+    SSIS:Name="sda_dir_name">
     <SSIS:Properties>
       <SSIS:Property
         SSIS:Name="ID">{e2bda340-bc4f-4b9b-8dc0-f300fa67c723}</SSIS:Property>
       <SSIS:Property
         SSIS:Name="CreationName"></SSIS:Property>
       <SSIS:Property
-        SSIS:Name="Description"></SSIS:Property>
+        SSIS:Name="Description">&lt;??&gt; folder name of source data archive files in local file system</SSIS:Property>
       <SSIS:Property
         SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
       <SSIS:Property
@@ -58,20 +58,20 @@
       <SSIS:Property
         SSIS:Name="Sensitive">0</SSIS:Property>
       <SSIS:Property
-        SSIS:Name="Value">C:\Users\user\data\DEV\stmt\loaded\</SSIS:Property>
+        SSIS:Name="Value">SDA</SSIS:Property>
       <SSIS:Property
         SSIS:Name="DataType">18</SSIS:Property>
     </SSIS:Properties>
   </SSIS:Parameter>
   <SSIS:Parameter
-    SSIS:Name="data_html_dir">
+    SSIS:Name="staging_dir_name">
     <SSIS:Properties>
       <SSIS:Property
         SSIS:Name="ID">{db72809d-45c5-432c-9fc4-53cf42f226fd}</SSIS:Property>
       <SSIS:Property
         SSIS:Name="CreationName"></SSIS:Property>
       <SSIS:Property
-        SSIS:Name="Description"></SSIS:Property>
+        SSIS:Name="Description">&lt;??&gt; folder name of staged files in local file system</SSIS:Property>
       <SSIS:Property
         SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
       <SSIS:Property
@@ -79,41 +79,20 @@
       <SSIS:Property
         SSIS:Name="Sensitive">0</SSIS:Property>
       <SSIS:Property
-        SSIS:Name="Value">C:\Users\user\data\DEV\stmt\html\</SSIS:Property>
+        SSIS:Name="Value">STAGING</SSIS:Property>
       <SSIS:Property
         SSIS:Name="DataType">18</SSIS:Property>
     </SSIS:Properties>
   </SSIS:Parameter>
   <SSIS:Parameter
-    SSIS:Name="data_parsed_dir">
-    <SSIS:Properties>
-      <SSIS:Property
-        SSIS:Name="ID">{83eaec30-da93-43a4-8394-97b47128c22d}</SSIS:Property>
-      <SSIS:Property
-        SSIS:Name="CreationName"></SSIS:Property>
-      <SSIS:Property
-        SSIS:Name="Description"></SSIS:Property>
-      <SSIS:Property
-        SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
-      <SSIS:Property
-        SSIS:Name="Required">0</SSIS:Property>
-      <SSIS:Property
-        SSIS:Name="Sensitive">0</SSIS:Property>
-      <SSIS:Property
-        SSIS:Name="Value">C:\Users\user\data\DEV\stmt\parsed\</SSIS:Property>
-      <SSIS:Property
-        SSIS:Name="DataType">18</SSIS:Property>
-    </SSIS:Properties>
-  </SSIS:Parameter>
-  <SSIS:Parameter
-    SSIS:Name="data_html_nodata_dir">
+    SSIS:Name="csv_dir_name">
     <SSIS:Properties>
       <SSIS:Property
         SSIS:Name="ID">{49ea6e3d-85c8-452c-86c8-16e9e56be1df}</SSIS:Property>
       <SSIS:Property
         SSIS:Name="CreationName"></SSIS:Property>
       <SSIS:Property
-        SSIS:Name="Description"></SSIS:Property>
+        SSIS:Name="Description">&lt;file_type&gt; folder name of *.csv files in local file system</SSIS:Property>
       <SSIS:Property
         SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
       <SSIS:Property
@@ -121,7 +100,70 @@
       <SSIS:Property
         SSIS:Name="Sensitive">0</SSIS:Property>
       <SSIS:Property
-        SSIS:Name="Value">C:\Users\user\data\DEV\stmt\html_nodata\</SSIS:Property>
+        SSIS:Name="Value">CSV</SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="DataType">18</SSIS:Property>
+    </SSIS:Properties>
+  </SSIS:Parameter>
+  <SSIS:Parameter
+    SSIS:Name="data_root">
+    <SSIS:Properties>
+      <SSIS:Property
+        SSIS:Name="ID">{99dffbe2-9abb-4269-9758-6cec99c686ea}</SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="CreationName"></SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="Description">&lt;data_root&gt;/&lt;data_source&gt;/&lt;file_type&gt;/&lt;??&gt;</SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="Required">0</SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="Sensitive">0</SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="Value">C:\Users\user\data\FinDW\</SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="DataType">18</SSIS:Property>
+    </SSIS:Properties>
+  </SSIS:Parameter>
+  <SSIS:Parameter
+    SSIS:Name="financial_statement_dir_name">
+    <SSIS:Properties>
+      <SSIS:Property
+        SSIS:Name="ID">{f3b41d3b-2ceb-46b5-a7ad-4844a5ce68ef}</SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="CreationName"></SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="Description">&lt;data_source&gt; folder name of financial statement data on local file system</SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="Required">0</SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="Sensitive">0</SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="Value">FinancialStatement</SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="DataType">18</SSIS:Property>
+    </SSIS:Properties>
+  </SSIS:Parameter>
+  <SSIS:Parameter
+    SSIS:Name="account_transaction_dir_name">
+    <SSIS:Properties>
+      <SSIS:Property
+        SSIS:Name="ID">{7e9466c4-f02d-4382-9f36-23eca43e4368}</SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="CreationName"></SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="Description">&lt;data_source&gt; folder name of account transaction data on local file system</SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="Required">0</SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="Sensitive">0</SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="Value">AccountTransaction</SSIS:Property>
       <SSIS:Property
         SSIS:Name="DataType">18</SSIS:Property>
     </SSIS:Properties>

@@ -141,7 +141,7 @@ CREATE TABLE staging.Statement(
 	import_path varchar(260) NOT NULL
 	,import_date date NULL
 	,download_date date NULL
-	
+
 	,CIDStr varchar(16) NULL
 	,PeriodEndDateStr varchar(16) NULL
 	,FiscalQuarterStr varchar(1) NULL
@@ -162,3 +162,56 @@ CREATE TABLE staging.Statement(
 END
 GO
 
+IF OBJECT_ID('sda.dbo.Statement') IS NOT NULL
+BEGIN
+	PRINT 'drop sda.dbo.Statement'
+	DROP TABLE sda.dbo.Statement;
+END
+GO
+
+BEGIN
+PRINT 'create sda.dbo.Statement'
+CREATE TABLE sda.dbo.Statement(
+	import_path varchar(260) NOT NULL
+	,import_date date NULL
+	,download_date date NULL
+	,FactID numeric(20,0)
+	
+	,CIDStr varchar(16) NULL
+	,PeriodEndDateStr varchar(16) NULL
+	,FiscalQuarterStr varchar(1) NULL
+	,StatementIDStr varchar(1) NULL
+	,AccountStr varchar(100) NULL
+	,SubAccountStr varchar(100) NULL
+	,ValueStr varchar(16) NULL
+)
+END
+GO
+
+
+IF OBJECT_ID('staging.AccountTransaction') IS NOT NULL
+BEGIN
+	PRINT 'drop staging.AccountTransaction'
+	DROP TABLE staging.AccountTransaction;
+END
+GO
+
+BEGIN
+PRINT 'create staging.AccountTransaction'
+CREATE TABLE staging.AccountTransaction(
+	import_path varchar(260) NOT NULL
+	,import_date date NULL
+	,download_date date NULL
+
+	,DescriptionStr varchar(120)
+	,SymbolStr varchar(64)
+	,TransactionDateStr varchar(16)
+	,SettlementDateStr varchar(16)
+	,AccountCurrencyStr varchar(16)
+	,TypeStr varchar(16)
+	,QuantityStr varchar(16)
+	,CurrencyOfPriceStr varchar(16)
+	,PriceStr varchar(16)
+	,SettlementAmountStr varchar(64)
+)
+END
