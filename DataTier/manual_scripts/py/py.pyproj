@@ -26,7 +26,6 @@
     <Compile Include="parse_html_companyid.py" />
     <Compile Include="parse_html_stmt.py" />
     <Compile Include="task_master.py" />
-    <Compile Include="tmp.py" />
     <Compile Include="tools.py" />
   </ItemGroup>
   <Import Project="$(PtvsTargetsFile)" Condition="Exists($(PtvsTargetsFile))" />

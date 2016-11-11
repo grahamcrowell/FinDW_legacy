@@ -1,0 +1,12 @@
+<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+  <Connections>
+    <OleDbConnection Name="Source" ConnectionString="Provider=SQLNCLI11;Server=localhost;Initial Catalog=master;Integrated Security=SSPI;" />
+    <OleDbConnection Name="Target" ConnectionString="Provider=SQLNCLI11;Server=localhost;Initial Catalog=master;Integrated Security=SSPI;" />
+  </Connections>
+  <Databases>
+    <Database Name="master" ConnectionName="Target" />
+  </Databases>
+  <Schemas>
+    <Schema Name="sys" DatabaseName="master" />
+  </Schemas>
+</Biml>

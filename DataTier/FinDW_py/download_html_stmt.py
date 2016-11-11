@@ -1,13 +1,13 @@
 import requests
-import os, time, multiprocessing as mp
-from datetime import *
+import os, time, multiprocessing as mp, collections
+from datetime import date
 import tools
 
 def nasdaq_stmt_url(cid,per_cnt,stmt_code):
 	return 'http://fundamentals.nasdaq.com/nasdaq_fundamentals.asp?CompanyID={}&NumPeriods={}&Duration=1&documentType={}'.format(cid,per_cnt,stmt_code)
 
 def nasdaq_stmt_path(cid,per_cnt,stmt_code):
-	return os.path.join(tools.data_root,tools.make_stmt_filename(cid,per_cnt,stmt_code,date.today()))
+	return os.path.join(tools.stmt_html,tools.make_stmt_filename(cid,per_cnt,stmt_code,date.today()))
 
 def download(url,inpath):
 	# print('downloading {}'.format(url))
@@ -31,3 +31,9 @@ def download_all3(html_download_param):
 		src_url = nasdaq_stmt_url(html_download_param.CID,html_download_param.period_cnt,stmt_code)
 		dst_pth = nasdaq_stmt_path(html_download_param.CID,html_download_param.period_cnt,stmt_code)
 		download(src_url,dst_pth)
+
+if __name__ == '__main__':
+	cid = 1532
+	period_cnt = 100
+	caterpillar_test = HtmlDownloadParam(cid, period_cnt)
+	download_all3(caterpillar_test)

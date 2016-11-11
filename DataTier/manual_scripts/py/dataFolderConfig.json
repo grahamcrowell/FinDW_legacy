@@ -1,0 +1,16 @@
+{
+	"root" : "C:/Users/user/Dropbox/FinDW/Data",
+	"statement" : 
+	{
+		"downloaded" : "C:/Users/user/Dropbox/FinDW/Data/Loading/Statement",
+		"parsed" : "C:/Users/user/Dropbox/FinDW/Data/Loading/Statement",
+		"loaded" : "C:/Users/user/Dropbox/FinDW/Data/Archive/Statement",
+		"error" : "C:/Users/user/Dropbox/FinDW/Data/Error/Statement"
+	},
+	"price" : 
+	{
+		"downloaded" : "C:/Users/user/Dropbox/FinDW/Data/Loading/Price",
+		"loaded" : "C:/Users/user/Dropbox/FinDW/Data/Archive/Price",
+		"error" : "C:/Users/user/Dropbox/FinDW/Data/Error/Price"
+	}
+}

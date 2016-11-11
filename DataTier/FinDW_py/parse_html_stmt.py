@@ -1,9 +1,9 @@
 import re, os, operator, shutil, collections, itertools, multiprocessing as mp
 import tools
 
-in_dir = os.path.join(tools.data_root,'staging/stmt/html')
-out_dir = os.path.join(tools.data_root,'staging/stmt/csv')
-archive_dir = os.path.join(tools.data_root,'archive/stmt/html')
+in_dir = tools.stmt_loading
+out_dir = tools.stmt_loading
+archive_dir = tools.stmt_parsed
 
 HtmlParseParam = collections.namedtuple('HtmlParseParam',['html_src_path', 'html_dst_dir', 'csv_dst_dir'])
 
@@ -141,8 +141,8 @@ def parse_stmt(html_parse_param):
 			print('path: {}\nlinenum: {}\n'.format(html_src_path,html_line_num))
 
 def parse_staged_files():
-	html_paths = tools.get_paths(tools.stmt_html)
-	path_setter = lambda path_in: HtmlParseParam(path_in,tools.stmt_parsed,tools.stmt_loading)
+	html_paths = tools.get_paths(tools.stmt_html,'html')[0:1]
+	path_setter = lambda path_in: HtmlParseParam(path_in,tools.stmt_loaded,tools.stmt_loading)
 	html_parse_params = map(path_setter, html_paths)
 	
 	# html_parse_param = HtmlParseParam(html_paths[0],tools.stmt_parsed,tools.stmt_loading)

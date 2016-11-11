@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="3728f45b-24b5-419c-826e-3d7459047f25" ChangeDateTime="10/29/2016 19:46:37">
+    <Property Name="ElementName" Value="[Dim].[SubAccount].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Dim].[SubAccount]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="SubAccountID" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="e965942c-6bbd-4bfe-8c2e-0e29733e8fc0" ChangeDateTime="10/29/2016 19:48:54">
+    <Property Name="ElementName" Value="[Dim].[Statement].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Dim].[Statement]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="StatementID" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="00d6f503-962a-4759-9669-85a7cef2bee9" ChangeDateTime="10/29/2016 20:16:57">
+    <Property Name="ElementName" Value="[Dim].[Stock].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Dim].[Stock]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="StockID" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="2c7aa8d5-6fd1-4e1c-a306-8d551c3fad43" ChangeDateTime="10/29/2016 21:34:56">
+    <Property Name="ElementName" Value="[dbo].[StatementFact].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[StatementFact]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Statement" />
+  </Operation>
+</Operations>

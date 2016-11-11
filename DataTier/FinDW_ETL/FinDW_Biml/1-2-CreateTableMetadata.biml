@@ -1,0 +1,28 @@
+<#
+var sourceConnection = RootNode.DbConnections["Source"];
+var importResult = sourceConnection.ImportDB("", "", ImportOptions.ExcludeForeignKey | ImportOptions.ExcludeColumnDefault | ImportOptions.ExcludeViews);
+#>
+<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+  <Tables>
+    <# foreach (var table in importResult.TableNodes) { #>
+    <Table Name="Staging_<#=table.Schema.Name#>_<#=table.Name#>" SchemaName="master.sys">
+      <Columns>
+        <# foreach (var column in table.Columns) { #>
+          <# if (column.DataType == System.Data.DbType.AnsiString) { #>
+            <Column Name="<#=column.Name#>" DataType="String" Length="<#=column.Length#>">
+              <Annotations>
+                <Annotation AnnotationType="Tag" Tag="ConvertToUnicode">yes</Annotation>
+              </Annotations>
+            </Column>
+          <# } else { #>
+            <#=column.GetBiml()#>
+          <# } #>
+        <# } #>
+      </Columns>
+      <Annotations>
+        <Annotation AnnotationType="Tag" Tag="SourceSchemaQualifiedName"><#=table.SchemaQualifiedName#></Annotation>
+      </Annotations>
+    </Table>
+    <# } #>
+  </Tables>
+</Biml>
