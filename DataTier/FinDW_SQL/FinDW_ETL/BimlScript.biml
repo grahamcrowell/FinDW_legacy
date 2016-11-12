@@ -1,0 +1,59 @@
+<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+    <Connections>
+        <OleDbConnection Name="StagingOleDbConnection" ConnectionString="Data Source=PC;Initial Catalog=Staging;Provider=SQLNCLI10.1;Integrated Security=SSPI;"></OleDbConnection>
+
+        <FlatFileConnection Name="StatementFlatFileConnection"
+    FileFormat="StatementFileFormat"
+    FilePath="C:\Users\user\Dropbox\FinDW\Data\Loading\Statement\949111_3_2015-10-05_80.csv"
+    CreateInProject="false"
+		/>
+    </Connections>
+    <FileFormats>
+        <FlatFileFormat 
+            Name="StatementFileFormat"
+			CodePage="1252"
+			RowDelimiter="CRLF"
+            ColumnNamesInFirstDataRow="true"
+			IsUnicode="false"
+            FlatFileType="Delimited"
+            TextQualifer="_x0022_"
+            >
+            <Columns>
+                <Column Name="SourceField" Length="50" InputLength="50" MaximumWidth="50" DataType="AnsiString"  ColumnType="Delimited"  CodePage="1252" Delimiter="," TextQualified="true" />
+                <Column Name="SomeValue" Precision="30" Scale="5"  DataType="Decimal"  ColumnType="Delimited"  CodePage="1252" Delimiter="CRLF" TextQualified="true"  />
+            </Columns>
+            </FlatFileFormat>
+    </FileFormats>
+
+    <!--
+    Source data is defined here
+SourceField,SomeValue
+"Seth",1234567890123456789012345.12345
+    Destination table is here
+CREATE TABLE dbo.SwishSwash
+(
+    SourceField varchar(50) NOT NULL
+,   SomeValue decimal(30,5) NOT NULL
+);
+    -->
+    <Packages>
+        <Package ConstraintMode="Linear" Name="NumericParsing">
+            <Variables>
+                <Variable DataType="Int32" Name="RowCountSource">0</Variable>
+            </Variables>
+            <Tasks>
+                <Dataflow Name="DFT Source">
+                    <Transformations>
+                        <FlatFileSource ConnectionName="FF Source" Name="FF Source" />
+                        
+                        <RowCount VariableName="User.RowCountSource" Name="CNT Totes"></RowCount>
+
+                        <OleDbDestination ConnectionName="CM_OLE" Name="OLEDB DST">
+                            <ExternalTableOutput Table="SwishSwash"></ExternalTableOutput>
+                        </OleDbDestination>
+                    </Transformations>
+                </Dataflow>
+            </Tasks>
+        </Package>
+    </Packages>
+</Biml>
