@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="6"
-  DTS:VersionGUID="{DBE3EC32-9661-4A82-9C06-FEA0384E9C62}">
+  DTS:VersionBuild="8"
+  DTS:VersionGUID="{381C7D47-3E94-4013-BE72-CEFA76D3F294}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -24,6 +24,16 @@
       <DTS:ObjectData>
         <DTS:ConnectionManager
           DTS:ConnectionString="C:\Users\user\Dropbox\FinDW\Data\Loading\Statement\944700_3_2015-10-05_80.csv" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DenodoODBCa_x86]"
+      DTS:CreationName="ODBC"
+      DTS:DTSID="{AAED9503-A3A7-4EBF-BEE4-2A3287E7BB28}"
+      DTS:ObjectName="DenodoODBCa_x86">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Dsn=DenodoODBCa_x86;Driver={DenodoODBC ANSI};" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -128,6 +138,26 @@
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[MsSqlOdbcX86_FinDW]"
+      DTS:CreationName="ODBC"
+      DTS:DTSID="{FBDA7A48-0389-4AE7-BCF4-3F0F85136E24}"
+      DTS:ObjectName="MsSqlOdbcX86_FinDW">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Dsn=MsSqlOdbcX86_FinDW;Driver={ODBC Driver 13 for SQL Server};" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[MsSqlOdbcX86_Staging]"
+      DTS:CreationName="ODBC"
+      DTS:DTSID="{00c82e9c-5636-4713-bf98-08087b93c9f4}"
+      DTS:ObjectName="MsSqlOdbcX86_Staging">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Dsn=MsSqlOdbcX86_Staging;Driver={ODBC Driver 13 for SQL Server};" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[PC.Staging]"
       DTS:CreationName="OLEDB"
       DTS:DTSID="{2FC7827F-ACEF-48C5-99BE-CA5FCD859925}"
@@ -140,25 +170,6 @@
   </DTS:ConnectionManagers>
   <DTS:Variables />
   <DTS:Executables>
-    <DTS:Executable
-      DTS:refId="Package\Bulk Insert Task"
-      DTS:CreationName="Microsoft.BulkInsertTask"
-      DTS:Description="Bulk Insert Task"
-      DTS:DTSID="{03AF42C1-9EE6-490D-A69C-6E52FE464C75}"
-      DTS:ExecutableType="Microsoft.BulkInsertTask"
-      DTS:LocaleID="-1"
-      DTS:ObjectName="Bulk Insert Task"
-      DTS:ThreadHint="0">
-      <DTS:Variables />
-      <DTS:ObjectData>
-        <BulkInsertTask:BulkInsertTaskData
-          BulkInsertTask:CheckConstraints="False"
-          BulkInsertTask:SourceConnectionName="{D0B9F061-8268-4047-AF38-6E21DC4A6DC3}"
-          BulkInsertTask:DestinationConnectionName="{2FC7827F-ACEF-48C5-99BE-CA5FCD859925}"
-          BulkInsertTask:DestinationTableName="[dbo].[Statement]"
-          BulkInsertTask:FormatFile="C:\Users\user\Source\Repos\FinDW\DataTier\FinDW_SQL\Staging\Statement.xml" xmlns:BulkInsertTask="www.microsoft.com/sqlserver/dts/tasks/bulkinserttask" />
-      </DTS:ObjectData>
-    </DTS:Executable>
     <DTS:Executable
       DTS:refId="Package\Data Flow Task"
       DTS:CreationName="Microsoft.Pipeline"
@@ -174,315 +185,489 @@
           version="1">
           <components>
             <component
-              refId="Package\Data Flow Task\Flat File Source"
-              componentClassID="Microsoft.FlatFileSource"
-              contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
-              description="Flat File Source"
-              localeId="1033"
-              name="Flat File Source"
+              refId="Package\Data Flow Task\Denodo ODBC Source"
+              componentClassID="Attunity.SSISODBCSrc"
+              contactInfo="ODBC Source;Connector for Open Database Connectivity (ODBC) by Attunity; Attunity Ltd.; All Rights Reserved; http://www.attunity.com;6"
+              description="ODBC Source"
+              name="Denodo ODBC Source"
               usesDispositions="true"
-              version="1">
+              version="6">
               <properties>
                 <property
-                  dataType="System.Boolean"
-                  description="Specifies whether zero-length columns are treated as null."
-                  name="RetainNulls">false</property>
+                  dataType="System.String"
+                  description="The name of the table to be fetched."
+                  expressionType="Notify"
+                  name="TableName">"staging"."statement"</property>
                 <property
                   dataType="System.String"
-                  description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
-                  name="FileNameColumnName"></property>
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the number of rows fetched per batch."
+                  expressionType="Notify"
+                  name="BatchSize">1000</property>
+                <property
+                  dataType="System.Int32"
+                  description="Determines the chunk size allocation for LOB columns"
+                  expressionType="Notify"
+                  name="LobChunkSize">32768</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines how the component exposes CHAR columns. If False, CHAR columns are exposed as (multi-)byte strings (DT_STR), if True, CHAR columns are exposed as wide strings (DT_WSTR)"
+                  expressionType="Notify"
+                  name="ExposeCharColumnsAsUnicode">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds to wait for an SQL statement to execute before returning to the application."
+                  expressionType="Notify"
+                  name="StatementTimeout">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="The code page to use when code page information is unavailable from the data source."
+                  expressionType="Notify"
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Int32"
+                  description="The mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="The method used for fetching data."
+                  expressionType="Notify"
+                  name="FetchMethod"
+                  typeConverter="FetchMethod">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="The ODBC C data type for binding numeric data."
+                  expressionType="Notify"
+                  name="BindNumericAs"
+                  typeConverter="BindNumericAs">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Determines how the component would bind columns of (multi)-byte string types (i.e., SQL_CHAR, SQL_VARCHAR, SQL_LONGVARCHAR). The options are: Unicode (SQL_C_WCHAR) and ANSI (SQL_C_CHAR)."
+                  expressionType="Notify"
+                  name="BindCharColumnsAs"
+                  typeConverter="BindCharColumnsAs">0</property>
               </properties>
               <connections>
                 <connection
-                  refId="Package\Data Flow Task\Flat File Source.Connections[FlatFileConnection]"
-                  connectionManagerID="Package.ConnectionManagers[Flat File Connection Manager]"
-                  connectionManagerRefId="Package.ConnectionManagers[Flat File Connection Manager]"
-                  name="FlatFileConnection" />
+                  refId="Package\Data Flow Task\Denodo ODBC Source.Connections[ODBCConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DenodoODBCa_x86]"
+                  connectionManagerRefId="Package.ConnectionManagers[DenodoODBCa_x86]"
+                  description="The ODBC runtime connection"
+                  name="ODBCConnection" />
               </connections>
               <outputs>
                 <output
-                  refId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output]"
-                  name="Flat File Source Output">
+                  refId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Output]"
+                  errorRowDisposition="FailComponent"
+                  name="ODBC Source Output"
+                  truncationRowDisposition="FailComponent">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[import_path]"
+                      refId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Output].Columns[import_path]"
                       codePage="1252"
                       dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[import_path]"
-                      length="50"
-                      lineageId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[import_path]"
-                      name="import_path"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          dataType="System.Boolean"
-                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
-                          name="FastParse">false</property>
-                        <property
-                          dataType="System.Boolean"
-                          description="Indicates whether the data is in binary format."
-                          name="UseBinaryFormat">false</property>
-                      </properties>
-                    </outputColumn>
+                      externalMetadataColumnId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Output].ExternalColumns[import_path]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Output].Columns[import_path]"
+                      name="import_path" />
                     <outputColumn
-                      refId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[CIDStr]"
+                      refId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Output].Columns[cidstr]"
                       codePage="1252"
                       dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[CIDStr]"
-                      length="50"
-                      lineageId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[CIDStr]"
-                      name="CIDStr"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          dataType="System.Boolean"
-                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
-                          name="FastParse">false</property>
-                        <property
-                          dataType="System.Boolean"
-                          description="Indicates whether the data is in binary format."
-                          name="UseBinaryFormat">false</property>
-                      </properties>
-                    </outputColumn>
+                      externalMetadataColumnId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Output].ExternalColumns[cidstr]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Output].Columns[cidstr]"
+                      name="cidstr" />
                     <outputColumn
-                      refId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[StatementIDStr]"
+                      refId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Output].Columns[statementidstr]"
                       codePage="1252"
                       dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[StatementIDStr]"
-                      length="50"
-                      lineageId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[StatementIDStr]"
-                      name="StatementIDStr"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          dataType="System.Boolean"
-                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
-                          name="FastParse">false</property>
-                        <property
-                          dataType="System.Boolean"
-                          description="Indicates whether the data is in binary format."
-                          name="UseBinaryFormat">false</property>
-                      </properties>
-                    </outputColumn>
+                      externalMetadataColumnId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Output].ExternalColumns[statementidstr]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Output].Columns[statementidstr]"
+                      name="statementidstr" />
                     <outputColumn
-                      refId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[download_date]"
+                      refId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Output].Columns[download_date]"
                       codePage="1252"
                       dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[download_date]"
-                      length="50"
-                      lineageId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[download_date]"
-                      name="download_date"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          dataType="System.Boolean"
-                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
-                          name="FastParse">false</property>
-                        <property
-                          dataType="System.Boolean"
-                          description="Indicates whether the data is in binary format."
-                          name="UseBinaryFormat">false</property>
-                      </properties>
-                    </outputColumn>
+                      externalMetadataColumnId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Output].ExternalColumns[download_date]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Output].Columns[download_date]"
+                      name="download_date" />
                     <outputColumn
-                      refId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[FiscalQuarterStr]"
+                      refId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Output].Columns[fiscalquarterstr]"
                       codePage="1252"
                       dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[FiscalQuarterStr]"
-                      length="50"
-                      lineageId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[FiscalQuarterStr]"
-                      name="FiscalQuarterStr"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          dataType="System.Boolean"
-                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
-                          name="FastParse">false</property>
-                        <property
-                          dataType="System.Boolean"
-                          description="Indicates whether the data is in binary format."
-                          name="UseBinaryFormat">false</property>
-                      </properties>
-                    </outputColumn>
+                      externalMetadataColumnId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Output].ExternalColumns[fiscalquarterstr]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Output].Columns[fiscalquarterstr]"
+                      name="fiscalquarterstr" />
                     <outputColumn
-                      refId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[PeriodEndDateStr]"
+                      refId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Output].Columns[periodenddatestr]"
                       codePage="1252"
                       dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[PeriodEndDateStr]"
-                      length="50"
-                      lineageId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[PeriodEndDateStr]"
-                      name="PeriodEndDateStr"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          dataType="System.Boolean"
-                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
-                          name="FastParse">false</property>
-                        <property
-                          dataType="System.Boolean"
-                          description="Indicates whether the data is in binary format."
-                          name="UseBinaryFormat">false</property>
-                      </properties>
-                    </outputColumn>
+                      externalMetadataColumnId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Output].ExternalColumns[periodenddatestr]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Output].Columns[periodenddatestr]"
+                      name="periodenddatestr" />
                     <outputColumn
-                      refId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[AccountStr]"
+                      refId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Output].Columns[accountstr]"
                       codePage="1252"
                       dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[AccountStr]"
-                      length="50"
-                      lineageId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[AccountStr]"
-                      name="AccountStr"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          dataType="System.Boolean"
-                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
-                          name="FastParse">false</property>
-                        <property
-                          dataType="System.Boolean"
-                          description="Indicates whether the data is in binary format."
-                          name="UseBinaryFormat">false</property>
-                      </properties>
-                    </outputColumn>
+                      externalMetadataColumnId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Output].ExternalColumns[accountstr]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Output].Columns[accountstr]"
+                      name="accountstr" />
                     <outputColumn
-                      refId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[SubAccountStr]"
+                      refId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Output].Columns[subaccountstr]"
                       codePage="1252"
                       dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[SubAccountStr]"
-                      length="50"
-                      lineageId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[SubAccountStr]"
-                      name="SubAccountStr"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          dataType="System.Boolean"
-                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
-                          name="FastParse">false</property>
-                        <property
-                          dataType="System.Boolean"
-                          description="Indicates whether the data is in binary format."
-                          name="UseBinaryFormat">false</property>
-                      </properties>
-                    </outputColumn>
+                      externalMetadataColumnId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Output].ExternalColumns[subaccountstr]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Output].Columns[subaccountstr]"
+                      name="subaccountstr" />
                     <outputColumn
-                      refId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[ValueStr]"
+                      refId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Output].Columns[valuestr]"
                       codePage="1252"
                       dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[ValueStr]"
-                      length="50"
-                      lineageId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[ValueStr]"
-                      name="ValueStr"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          dataType="System.Boolean"
-                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
-                          name="FastParse">false</property>
-                        <property
-                          dataType="System.Boolean"
-                          description="Indicates whether the data is in binary format."
-                          name="UseBinaryFormat">false</property>
-                      </properties>
-                    </outputColumn>
+                      externalMetadataColumnId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Output].ExternalColumns[valuestr]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Output].Columns[valuestr]"
+                      name="valuestr" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[import_path]"
+                      refId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Output].ExternalColumns[import_path]"
                       codePage="1252"
                       dataType="str"
-                      length="50"
+                      length="255"
                       name="import_path" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[CIDStr]"
+                      refId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Output].ExternalColumns[cidstr]"
                       codePage="1252"
                       dataType="str"
-                      length="50"
-                      name="CIDStr" />
+                      length="255"
+                      name="cidstr" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[StatementIDStr]"
+                      refId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Output].ExternalColumns[statementidstr]"
                       codePage="1252"
                       dataType="str"
-                      length="50"
-                      name="StatementIDStr" />
+                      length="255"
+                      name="statementidstr" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[download_date]"
+                      refId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Output].ExternalColumns[download_date]"
                       codePage="1252"
                       dataType="str"
-                      length="50"
+                      length="255"
                       name="download_date" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[FiscalQuarterStr]"
+                      refId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Output].ExternalColumns[fiscalquarterstr]"
                       codePage="1252"
                       dataType="str"
-                      length="50"
-                      name="FiscalQuarterStr" />
+                      length="255"
+                      name="fiscalquarterstr" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[PeriodEndDateStr]"
+                      refId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Output].ExternalColumns[periodenddatestr]"
                       codePage="1252"
                       dataType="str"
-                      length="50"
-                      name="PeriodEndDateStr" />
+                      length="255"
+                      name="periodenddatestr" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[AccountStr]"
+                      refId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Output].ExternalColumns[accountstr]"
                       codePage="1252"
                       dataType="str"
-                      length="50"
-                      name="AccountStr" />
+                      length="255"
+                      name="accountstr" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[SubAccountStr]"
+                      refId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Output].ExternalColumns[subaccountstr]"
                       codePage="1252"
                       dataType="str"
-                      length="50"
-                      name="SubAccountStr" />
+                      length="255"
+                      name="subaccountstr" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[ValueStr]"
+                      refId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Output].ExternalColumns[valuestr]"
                       codePage="1252"
                       dataType="str"
-                      length="50"
-                      name="ValueStr" />
+                      length="255"
+                      name="valuestr" />
                   </externalMetadataColumns>
                 </output>
                 <output
-                  refId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Error Output]"
+                  refId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Error Output]"
                   isErrorOut="true"
-                  name="Flat File Source Error Output">
+                  name="ODBC Source Error Output">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      refId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Error Output].Columns[import_path]"
                       codePage="1252"
-                      dataType="text"
-                      description="Flat File Source Error Output Column"
-                      lineageId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
-                      name="Flat File Source Error Output Column" />
+                      dataType="str"
+                      externalMetadataColumnId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Output].ExternalColumns[import_path]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Error Output].Columns[import_path]"
+                      name="import_path" />
                     <outputColumn
-                      refId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      refId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Error Output].Columns[cidstr]"
+                      codePage="1252"
+                      dataType="str"
+                      externalMetadataColumnId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Output].ExternalColumns[cidstr]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Error Output].Columns[cidstr]"
+                      name="cidstr" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Error Output].Columns[statementidstr]"
+                      codePage="1252"
+                      dataType="str"
+                      externalMetadataColumnId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Output].ExternalColumns[statementidstr]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Error Output].Columns[statementidstr]"
+                      name="statementidstr" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Error Output].Columns[download_date]"
+                      codePage="1252"
+                      dataType="str"
+                      externalMetadataColumnId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Output].ExternalColumns[download_date]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Error Output].Columns[download_date]"
+                      name="download_date" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Error Output].Columns[fiscalquarterstr]"
+                      codePage="1252"
+                      dataType="str"
+                      externalMetadataColumnId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Output].ExternalColumns[fiscalquarterstr]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Error Output].Columns[fiscalquarterstr]"
+                      name="fiscalquarterstr" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Error Output].Columns[periodenddatestr]"
+                      codePage="1252"
+                      dataType="str"
+                      externalMetadataColumnId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Output].ExternalColumns[periodenddatestr]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Error Output].Columns[periodenddatestr]"
+                      name="periodenddatestr" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Error Output].Columns[accountstr]"
+                      codePage="1252"
+                      dataType="str"
+                      externalMetadataColumnId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Output].ExternalColumns[accountstr]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Error Output].Columns[accountstr]"
+                      name="accountstr" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Error Output].Columns[subaccountstr]"
+                      codePage="1252"
+                      dataType="str"
+                      externalMetadataColumnId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Output].ExternalColumns[subaccountstr]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Error Output].Columns[subaccountstr]"
+                      name="subaccountstr" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Error Output].Columns[valuestr]"
+                      codePage="1252"
+                      dataType="str"
+                      externalMetadataColumnId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Output].ExternalColumns[valuestr]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Error Output].Columns[valuestr]"
+                      name="valuestr" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      lineageId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      refId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Data Flow Task\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\Data Flow Task\Denodo ODBC Source.Outputs[ODBC Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\FinDW ODBC Source"
+              componentClassID="Attunity.SSISODBCSrc"
+              contactInfo="ODBC Source;Connector for Open Database Connectivity (ODBC) by Attunity; Attunity Ltd.; All Rights Reserved; http://www.attunity.com;6"
+              description="ODBC Source"
+              name="FinDW ODBC Source"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="The name of the table to be fetched."
+                  expressionType="Notify"
+                  name="TableName">"Dim"."Stock"</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the number of rows fetched per batch."
+                  expressionType="Notify"
+                  name="BatchSize">1000</property>
+                <property
+                  dataType="System.Int32"
+                  description="Determines the chunk size allocation for LOB columns"
+                  expressionType="Notify"
+                  name="LobChunkSize">32768</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines how the component exposes CHAR columns. If False, CHAR columns are exposed as (multi-)byte strings (DT_STR), if True, CHAR columns are exposed as wide strings (DT_WSTR)"
+                  expressionType="Notify"
+                  name="ExposeCharColumnsAsUnicode">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds to wait for an SQL statement to execute before returning to the application."
+                  expressionType="Notify"
+                  name="StatementTimeout">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="The code page to use when code page information is unavailable from the data source."
+                  expressionType="Notify"
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Int32"
+                  description="The mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="The method used for fetching data."
+                  expressionType="Notify"
+                  name="FetchMethod"
+                  typeConverter="FetchMethod">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="The ODBC C data type for binding numeric data."
+                  expressionType="Notify"
+                  name="BindNumericAs"
+                  typeConverter="BindNumericAs">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Determines how the component would bind columns of (multi)-byte string types (i.e., SQL_CHAR, SQL_VARCHAR, SQL_LONGVARCHAR). The options are: Unicode (SQL_C_WCHAR) and ANSI (SQL_C_CHAR)."
+                  expressionType="Notify"
+                  name="BindCharColumnsAs"
+                  typeConverter="BindCharColumnsAs">0</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\FinDW ODBC Source.Connections[ODBCConnection]"
+                  connectionManagerID="Package.ConnectionManagers[MsSqlOdbcX86_FinDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[MsSqlOdbcX86_FinDW]"
+                  description="The ODBC runtime connection"
+                  name="ODBCConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\FinDW ODBC Source.Outputs[ODBC Source Output]"
+                  errorRowDisposition="FailComponent"
+                  name="ODBC Source Output"
+                  truncationRowDisposition="FailComponent">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\FinDW ODBC Source.Outputs[ODBC Source Output].Columns[StockID]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\Data Flow Task\FinDW ODBC Source.Outputs[ODBC Source Output].ExternalColumns[StockID]"
+                      lineageId="Package\Data Flow Task\FinDW ODBC Source.Outputs[ODBC Source Output].Columns[StockID]"
+                      name="StockID" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\FinDW ODBC Source.Outputs[ODBC Source Output].Columns[StockName]"
+                      codePage="1252"
+                      dataType="str"
+                      externalMetadataColumnId="Package\Data Flow Task\FinDW ODBC Source.Outputs[ODBC Source Output].ExternalColumns[StockName]"
+                      length="64"
+                      lineageId="Package\Data Flow Task\FinDW ODBC Source.Outputs[ODBC Source Output].Columns[StockName]"
+                      name="StockName" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\FinDW ODBC Source.Outputs[ODBC Source Output].Columns[Symbol]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\Data Flow Task\FinDW ODBC Source.Outputs[ODBC Source Output].ExternalColumns[Symbol]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\FinDW ODBC Source.Outputs[ODBC Source Output].Columns[Symbol]"
+                      name="Symbol" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\FinDW ODBC Source.Outputs[ODBC Source Output].Columns[CID]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\Data Flow Task\FinDW ODBC Source.Outputs[ODBC Source Output].ExternalColumns[CID]"
+                      lineageId="Package\Data Flow Task\FinDW ODBC Source.Outputs[ODBC Source Output].Columns[CID]"
+                      name="CID" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\FinDW ODBC Source.Outputs[ODBC Source Output].ExternalColumns[StockID]"
+                      dataType="i4"
+                      name="StockID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\FinDW ODBC Source.Outputs[ODBC Source Output].ExternalColumns[StockName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="64"
+                      name="StockName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\FinDW ODBC Source.Outputs[ODBC Source Output].ExternalColumns[Symbol]"
+                      dataType="wstr"
+                      length="50"
+                      name="Symbol" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\FinDW ODBC Source.Outputs[ODBC Source Output].ExternalColumns[CID]"
+                      dataType="i4"
+                      name="CID" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task\FinDW ODBC Source.Outputs[ODBC Source Error Output]"
+                  isErrorOut="true"
+                  name="ODBC Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\FinDW ODBC Source.Outputs[ODBC Source Error Output].Columns[StockID]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\Data Flow Task\FinDW ODBC Source.Outputs[ODBC Source Output].ExternalColumns[StockID]"
+                      lineageId="Package\Data Flow Task\FinDW ODBC Source.Outputs[ODBC Source Error Output].Columns[StockID]"
+                      name="StockID" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\FinDW ODBC Source.Outputs[ODBC Source Error Output].Columns[StockName]"
+                      codePage="1252"
+                      dataType="str"
+                      externalMetadataColumnId="Package\Data Flow Task\FinDW ODBC Source.Outputs[ODBC Source Output].ExternalColumns[StockName]"
+                      length="64"
+                      lineageId="Package\Data Flow Task\FinDW ODBC Source.Outputs[ODBC Source Error Output].Columns[StockName]"
+                      name="StockName" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\FinDW ODBC Source.Outputs[ODBC Source Error Output].Columns[Symbol]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\Data Flow Task\FinDW ODBC Source.Outputs[ODBC Source Output].ExternalColumns[Symbol]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\FinDW ODBC Source.Outputs[ODBC Source Error Output].Columns[Symbol]"
+                      name="Symbol" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\FinDW ODBC Source.Outputs[ODBC Source Error Output].Columns[CID]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\Data Flow Task\FinDW ODBC Source.Outputs[ODBC Source Output].ExternalColumns[CID]"
+                      lineageId="Package\Data Flow Task\FinDW ODBC Source.Outputs[ODBC Source Error Output].Columns[CID]"
+                      name="CID" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\FinDW ODBC Source.Outputs[ODBC Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\FinDW ODBC Source.Outputs[ODBC Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\FinDW ODBC Source.Outputs[ODBC Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\FinDW ODBC Source.Outputs[ODBC Source Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -508,10 +693,6 @@
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
         <NodeLayout
-          Size="156,42.6666666666667"
-          Id="Package\Bulk Insert Task"
-          TopLeft="297.083328906447,74.9666653261582" />
-        <NodeLayout
           Size="152,42.6666666666667"
           Id="Package\Data Flow Task"
           TopLeft="332.499995045364,158.599997164011" />
@@ -524,11 +705,35 @@
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
         <NodeLayout
-          Size="152,42.6666666666667"
-          Id="Package\Data Flow Task\Flat File Source"
-          TopLeft="5.5,5.5" />
+          Size="182.666666666667,42.6666666666667"
+          Id="Package\Data Flow Task\Denodo ODBC Source"
+          TopLeft="138.333331272006,23.3999995815754" />
+        <NodeLayout
+          Size="177.333333333334,42.6666666666667"
+          Id="Package\Data Flow Task\FinDW ODBC Source"
+          TopLeft="385.416660923511,45.9333325119813" />
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\Denodo ODBC Source">
+    <Properties>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\FinDW ODBC Source">
+    <Properties>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
 </Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>

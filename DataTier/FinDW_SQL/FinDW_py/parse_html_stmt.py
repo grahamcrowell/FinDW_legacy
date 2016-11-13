@@ -36,8 +36,8 @@ def parse_stmt(html_parse_param):
 			index = 0
 			data = []
 			qtr = None
-			print('parsing: '+html_src_path)
 			html_line_num = 0
+			print('parsing: '+html_src_path)
 			with open(html_src_path) as html_file:
 				while 1:
 					line = html_file.readline()

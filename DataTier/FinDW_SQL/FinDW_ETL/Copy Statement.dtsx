@@ -1,0 +1,613 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/12/2016 5:08:04 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="PC"
+  DTS:CreatorName="user"
+  DTS:DTSID="{E1682D70-1390-427E-8BE1-7A2F472E7830}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Copy Statement"
+  DTS:ProtectionLevel="0"
+  DTS:VersionBuild="1"
+  DTS:VersionGUID="{93E68040-6007-44DD-9A4F-A286294687FA}"
+  DTS:VersionMajor="0">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Source]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{1D3CD25A-5378-4C19-A9C1-091556ACB8BE}"
+      DTS:ObjectName="Source">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="server=PC;initial catalog=staging;provider=SQLNCLI11;integrated security=SSPI;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Target]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{2C2BE3EF-BA64-4A2A-AB6A-BB1D74000172}"
+      DTS:ObjectName="Target">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="server=PC;initial catalog=FinDW;provider=SQLNCLI11;integrated security=SSPI;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\DFT_CopyData"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:DTSID="{D431C844-AAC3-4E94-AFCA-7E9E7550396F}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DFT_CopyData"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          version="1">
+          <components>
+            <component
+              refId="Package\DFT_CopyData\Load Rows"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              name="Load Rows"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">Statement</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT_CopyData\Load Rows.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Target]"
+                  connectionManagerRefId="Package.ConnectionManagers[Target]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT_CopyData\Load Rows.Inputs[Retrieve Rows_Output_Load Rows]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Retrieve Rows_Output_Load Rows">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_CopyData\Load Rows.Inputs[Retrieve Rows_Output_Load Rows].Columns[import_path]"
+                      cachedDataType="wstr"
+                      cachedLength="500"
+                      cachedName="import_path"
+                      externalMetadataColumnId="Package\DFT_CopyData\Load Rows.Inputs[Retrieve Rows_Output_Load Rows].ExternalColumns[import_path]"
+                      lineageId="Package\DFT_CopyData\Retrieve Rows.Outputs[Output].Columns[import_path]" />
+                    <inputColumn
+                      refId="Package\DFT_CopyData\Load Rows.Inputs[Retrieve Rows_Output_Load Rows].Columns[CIDStr]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="CIDStr"
+                      externalMetadataColumnId="Package\DFT_CopyData\Load Rows.Inputs[Retrieve Rows_Output_Load Rows].ExternalColumns[CIDStr]"
+                      lineageId="Package\DFT_CopyData\Retrieve Rows.Outputs[Output].Columns[CIDStr]" />
+                    <inputColumn
+                      refId="Package\DFT_CopyData\Load Rows.Inputs[Retrieve Rows_Output_Load Rows].Columns[StatementIDStr]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="StatementIDStr"
+                      externalMetadataColumnId="Package\DFT_CopyData\Load Rows.Inputs[Retrieve Rows_Output_Load Rows].ExternalColumns[StatementIDStr]"
+                      lineageId="Package\DFT_CopyData\Retrieve Rows.Outputs[Output].Columns[StatementIDStr]" />
+                    <inputColumn
+                      refId="Package\DFT_CopyData\Load Rows.Inputs[Retrieve Rows_Output_Load Rows].Columns[download_date]"
+                      cachedDataType="wstr"
+                      cachedLength="12"
+                      cachedName="download_date"
+                      externalMetadataColumnId="Package\DFT_CopyData\Load Rows.Inputs[Retrieve Rows_Output_Load Rows].ExternalColumns[download_date]"
+                      lineageId="Package\DFT_CopyData\Retrieve Rows.Outputs[Output].Columns[download_date]" />
+                    <inputColumn
+                      refId="Package\DFT_CopyData\Load Rows.Inputs[Retrieve Rows_Output_Load Rows].Columns[FiscalQuarterStr]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="FiscalQuarterStr"
+                      externalMetadataColumnId="Package\DFT_CopyData\Load Rows.Inputs[Retrieve Rows_Output_Load Rows].ExternalColumns[FiscalQuarterStr]"
+                      lineageId="Package\DFT_CopyData\Retrieve Rows.Outputs[Output].Columns[FiscalQuarterStr]" />
+                    <inputColumn
+                      refId="Package\DFT_CopyData\Load Rows.Inputs[Retrieve Rows_Output_Load Rows].Columns[PeriodEndDateStr]"
+                      cachedDataType="wstr"
+                      cachedLength="120"
+                      cachedName="PeriodEndDateStr"
+                      externalMetadataColumnId="Package\DFT_CopyData\Load Rows.Inputs[Retrieve Rows_Output_Load Rows].ExternalColumns[PeriodEndDateStr]"
+                      lineageId="Package\DFT_CopyData\Retrieve Rows.Outputs[Output].Columns[PeriodEndDateStr]" />
+                    <inputColumn
+                      refId="Package\DFT_CopyData\Load Rows.Inputs[Retrieve Rows_Output_Load Rows].Columns[AccountStr]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="AccountStr"
+                      externalMetadataColumnId="Package\DFT_CopyData\Load Rows.Inputs[Retrieve Rows_Output_Load Rows].ExternalColumns[AccountStr]"
+                      lineageId="Package\DFT_CopyData\Retrieve Rows.Outputs[Output].Columns[AccountStr]" />
+                    <inputColumn
+                      refId="Package\DFT_CopyData\Load Rows.Inputs[Retrieve Rows_Output_Load Rows].Columns[SubAccountStr]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="SubAccountStr"
+                      externalMetadataColumnId="Package\DFT_CopyData\Load Rows.Inputs[Retrieve Rows_Output_Load Rows].ExternalColumns[SubAccountStr]"
+                      lineageId="Package\DFT_CopyData\Retrieve Rows.Outputs[Output].Columns[SubAccountStr]" />
+                    <inputColumn
+                      refId="Package\DFT_CopyData\Load Rows.Inputs[Retrieve Rows_Output_Load Rows].Columns[ValueStr]"
+                      cachedDataType="wstr"
+                      cachedLength="500"
+                      cachedName="ValueStr"
+                      externalMetadataColumnId="Package\DFT_CopyData\Load Rows.Inputs[Retrieve Rows_Output_Load Rows].ExternalColumns[ValueStr]"
+                      lineageId="Package\DFT_CopyData\Retrieve Rows.Outputs[Output].Columns[ValueStr]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT_CopyData\Load Rows.Inputs[Retrieve Rows_Output_Load Rows].ExternalColumns[import_path]"
+                      dataType="wstr"
+                      length="500"
+                      name="import_path" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_CopyData\Load Rows.Inputs[Retrieve Rows_Output_Load Rows].ExternalColumns[CIDStr]"
+                      dataType="wstr"
+                      length="50"
+                      name="CIDStr" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_CopyData\Load Rows.Inputs[Retrieve Rows_Output_Load Rows].ExternalColumns[StatementIDStr]"
+                      dataType="wstr"
+                      length="100"
+                      name="StatementIDStr" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_CopyData\Load Rows.Inputs[Retrieve Rows_Output_Load Rows].ExternalColumns[download_date]"
+                      dataType="wstr"
+                      length="12"
+                      name="download_date" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_CopyData\Load Rows.Inputs[Retrieve Rows_Output_Load Rows].ExternalColumns[FiscalQuarterStr]"
+                      dataType="wstr"
+                      length="100"
+                      name="FiscalQuarterStr" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_CopyData\Load Rows.Inputs[Retrieve Rows_Output_Load Rows].ExternalColumns[PeriodEndDateStr]"
+                      dataType="wstr"
+                      length="120"
+                      name="PeriodEndDateStr" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_CopyData\Load Rows.Inputs[Retrieve Rows_Output_Load Rows].ExternalColumns[AccountStr]"
+                      dataType="wstr"
+                      length="20"
+                      name="AccountStr" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_CopyData\Load Rows.Inputs[Retrieve Rows_Output_Load Rows].ExternalColumns[SubAccountStr]"
+                      dataType="wstr"
+                      length="20"
+                      name="SubAccountStr" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_CopyData\Load Rows.Inputs[Retrieve Rows_Output_Load Rows].ExternalColumns[ValueStr]"
+                      dataType="wstr"
+                      length="500"
+                      name="ValueStr" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_CopyData\Load Rows.Outputs[Error]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Error"
+                  synchronousInputId="Package\DFT_CopyData\Load Rows.Inputs[Retrieve Rows_Output_Load Rows]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_CopyData\Load Rows.Outputs[Error].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_CopyData\Load Rows.Outputs[Error].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_CopyData\Load Rows.Outputs[Error].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_CopyData\Load Rows.Outputs[Error].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_CopyData\Retrieve Rows"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              name="Retrieve Rows"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT * FROM Statement</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT_CopyData\Retrieve Rows.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Source]"
+                  connectionManagerRefId="Package.ConnectionManagers[Source]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DFT_CopyData\Retrieve Rows.Outputs[Output]"
+                  name="Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_CopyData\Retrieve Rows.Outputs[Output].Columns[import_path]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_CopyData\Retrieve Rows.Outputs[Output].ExternalColumns[import_path]"
+                      length="500"
+                      lineageId="Package\DFT_CopyData\Retrieve Rows.Outputs[Output].Columns[import_path]"
+                      name="import_path"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_CopyData\Retrieve Rows.Outputs[Output].Columns[CIDStr]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_CopyData\Retrieve Rows.Outputs[Output].ExternalColumns[CIDStr]"
+                      length="50"
+                      lineageId="Package\DFT_CopyData\Retrieve Rows.Outputs[Output].Columns[CIDStr]"
+                      name="CIDStr"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_CopyData\Retrieve Rows.Outputs[Output].Columns[StatementIDStr]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_CopyData\Retrieve Rows.Outputs[Output].ExternalColumns[StatementIDStr]"
+                      length="100"
+                      lineageId="Package\DFT_CopyData\Retrieve Rows.Outputs[Output].Columns[StatementIDStr]"
+                      name="StatementIDStr"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_CopyData\Retrieve Rows.Outputs[Output].Columns[download_date]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_CopyData\Retrieve Rows.Outputs[Output].ExternalColumns[download_date]"
+                      length="12"
+                      lineageId="Package\DFT_CopyData\Retrieve Rows.Outputs[Output].Columns[download_date]"
+                      name="download_date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_CopyData\Retrieve Rows.Outputs[Output].Columns[FiscalQuarterStr]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_CopyData\Retrieve Rows.Outputs[Output].ExternalColumns[FiscalQuarterStr]"
+                      length="100"
+                      lineageId="Package\DFT_CopyData\Retrieve Rows.Outputs[Output].Columns[FiscalQuarterStr]"
+                      name="FiscalQuarterStr"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_CopyData\Retrieve Rows.Outputs[Output].Columns[PeriodEndDateStr]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_CopyData\Retrieve Rows.Outputs[Output].ExternalColumns[PeriodEndDateStr]"
+                      length="120"
+                      lineageId="Package\DFT_CopyData\Retrieve Rows.Outputs[Output].Columns[PeriodEndDateStr]"
+                      name="PeriodEndDateStr"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_CopyData\Retrieve Rows.Outputs[Output].Columns[AccountStr]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_CopyData\Retrieve Rows.Outputs[Output].ExternalColumns[AccountStr]"
+                      length="20"
+                      lineageId="Package\DFT_CopyData\Retrieve Rows.Outputs[Output].Columns[AccountStr]"
+                      name="AccountStr"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_CopyData\Retrieve Rows.Outputs[Output].Columns[SubAccountStr]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_CopyData\Retrieve Rows.Outputs[Output].ExternalColumns[SubAccountStr]"
+                      length="20"
+                      lineageId="Package\DFT_CopyData\Retrieve Rows.Outputs[Output].Columns[SubAccountStr]"
+                      name="SubAccountStr"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT_CopyData\Retrieve Rows.Outputs[Output].Columns[ValueStr]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_CopyData\Retrieve Rows.Outputs[Output].ExternalColumns[ValueStr]"
+                      length="500"
+                      lineageId="Package\DFT_CopyData\Retrieve Rows.Outputs[Output].Columns[ValueStr]"
+                      name="ValueStr"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT_CopyData\Retrieve Rows.Outputs[Output].ExternalColumns[import_path]"
+                      dataType="wstr"
+                      length="500"
+                      name="import_path" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_CopyData\Retrieve Rows.Outputs[Output].ExternalColumns[CIDStr]"
+                      dataType="wstr"
+                      length="50"
+                      name="CIDStr" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_CopyData\Retrieve Rows.Outputs[Output].ExternalColumns[StatementIDStr]"
+                      dataType="wstr"
+                      length="100"
+                      name="StatementIDStr" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_CopyData\Retrieve Rows.Outputs[Output].ExternalColumns[download_date]"
+                      dataType="wstr"
+                      length="12"
+                      name="download_date" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_CopyData\Retrieve Rows.Outputs[Output].ExternalColumns[FiscalQuarterStr]"
+                      dataType="wstr"
+                      length="100"
+                      name="FiscalQuarterStr" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_CopyData\Retrieve Rows.Outputs[Output].ExternalColumns[PeriodEndDateStr]"
+                      dataType="wstr"
+                      length="120"
+                      name="PeriodEndDateStr" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_CopyData\Retrieve Rows.Outputs[Output].ExternalColumns[AccountStr]"
+                      dataType="wstr"
+                      length="20"
+                      name="AccountStr" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_CopyData\Retrieve Rows.Outputs[Output].ExternalColumns[SubAccountStr]"
+                      dataType="wstr"
+                      length="20"
+                      name="SubAccountStr" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_CopyData\Retrieve Rows.Outputs[Output].ExternalColumns[ValueStr]"
+                      dataType="wstr"
+                      length="500"
+                      name="ValueStr" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DFT_CopyData\Retrieve Rows.Outputs[Error]"
+                  isErrorOut="true"
+                  name="Error">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_CopyData\Retrieve Rows.Outputs[Error].Columns[import_path]"
+                      dataType="wstr"
+                      length="500"
+                      lineageId="Package\DFT_CopyData\Retrieve Rows.Outputs[Error].Columns[import_path]"
+                      name="import_path" />
+                    <outputColumn
+                      refId="Package\DFT_CopyData\Retrieve Rows.Outputs[Error].Columns[CIDStr]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\DFT_CopyData\Retrieve Rows.Outputs[Error].Columns[CIDStr]"
+                      name="CIDStr" />
+                    <outputColumn
+                      refId="Package\DFT_CopyData\Retrieve Rows.Outputs[Error].Columns[StatementIDStr]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\DFT_CopyData\Retrieve Rows.Outputs[Error].Columns[StatementIDStr]"
+                      name="StatementIDStr" />
+                    <outputColumn
+                      refId="Package\DFT_CopyData\Retrieve Rows.Outputs[Error].Columns[download_date]"
+                      dataType="wstr"
+                      length="12"
+                      lineageId="Package\DFT_CopyData\Retrieve Rows.Outputs[Error].Columns[download_date]"
+                      name="download_date" />
+                    <outputColumn
+                      refId="Package\DFT_CopyData\Retrieve Rows.Outputs[Error].Columns[FiscalQuarterStr]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\DFT_CopyData\Retrieve Rows.Outputs[Error].Columns[FiscalQuarterStr]"
+                      name="FiscalQuarterStr" />
+                    <outputColumn
+                      refId="Package\DFT_CopyData\Retrieve Rows.Outputs[Error].Columns[PeriodEndDateStr]"
+                      dataType="wstr"
+                      length="120"
+                      lineageId="Package\DFT_CopyData\Retrieve Rows.Outputs[Error].Columns[PeriodEndDateStr]"
+                      name="PeriodEndDateStr" />
+                    <outputColumn
+                      refId="Package\DFT_CopyData\Retrieve Rows.Outputs[Error].Columns[AccountStr]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\DFT_CopyData\Retrieve Rows.Outputs[Error].Columns[AccountStr]"
+                      name="AccountStr" />
+                    <outputColumn
+                      refId="Package\DFT_CopyData\Retrieve Rows.Outputs[Error].Columns[SubAccountStr]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\DFT_CopyData\Retrieve Rows.Outputs[Error].Columns[SubAccountStr]"
+                      name="SubAccountStr" />
+                    <outputColumn
+                      refId="Package\DFT_CopyData\Retrieve Rows.Outputs[Error].Columns[ValueStr]"
+                      dataType="wstr"
+                      length="500"
+                      lineageId="Package\DFT_CopyData\Retrieve Rows.Outputs[Error].Columns[ValueStr]"
+                      name="ValueStr" />
+                    <outputColumn
+                      refId="Package\DFT_CopyData\Retrieve Rows.Outputs[Error].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_CopyData\Retrieve Rows.Outputs[Error].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_CopyData\Retrieve Rows.Outputs[Error].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_CopyData\Retrieve Rows.Outputs[Error].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DFT_CopyData.Paths[Retrieve Rows_Output_Load Rows]"
+              endId="Package\DFT_CopyData\Load Rows.Inputs[Retrieve Rows_Output_Load Rows]"
+              name="Retrieve Rows_Output_Load Rows"
+              startId="Package\DFT_CopyData\Retrieve Rows.Outputs[Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="149.333333333334,42.6666666666667"
+          Id="Package\DFT_CopyData"
+          TopLeft="5.5,5.50000000000004" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\DFT_CopyData">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="131.333333333334,42.6666666666667"
+          Id="Package\DFT_CopyData\Load Rows"
+          TopLeft="12.7500000062088,108.166666666667" />
+        <NodeLayout
+          Size="146.666666666667,42.6666666666667"
+          Id="Package\DFT_CopyData\Retrieve Rows"
+          TopLeft="5.50000000000001,5.50000000000004" />
+        <EdgeLayout
+          Id="Package\DFT_CopyData.Paths[Retrieve Rows_Output_Load Rows]"
+          TopLeft="78.6250000031044,48.1666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

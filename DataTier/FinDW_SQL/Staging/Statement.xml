@@ -1,8 +1,8 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <BCPFORMAT
 xmlns="http://schemas.microsoft.com/sqlserver/2004/bulkload/format"
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <RECORD>
+ <RECORD>
     <FIELD ID="1" xsi:type="CharTerm" TERMINATOR='\t'/>
     <FIELD ID="2" xsi:type="CharTerm" TERMINATOR='\t'/>
     <FIELD ID="3" xsi:type="CharTerm" TERMINATOR='\t'/>
@@ -25,3 +25,13 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <COLUMN SOURCE="9" NAME="ValueStr" xsi:type="SQLNVARCHAR"/>
   </ROW>
 </BCPFORMAT>
+
+<Column Name="import_path" Length="50" InputLength="50" MaximumWidth="50" DataType="AnsiString" ColumnType="Delimited" CodePage="1252" Delimiter="," TextQualified="true" />
+<Column Name="CIDStr" Length="100" InputLength="50" MaximumWidth="50" DataType="AnsiString" ColumnType="Delimited" CodePage="1252" Delimiter="," TextQualified="true" />
+<Column Name="StatementIDStr" Length="100" InputLength="50" MaximumWidth="50" DataType="AnsiString" ColumnType="Delimited" CodePage="1252" Delimiter="," TextQualified="true" />
+<Column Name="download_date" Length="100" InputLength="50" MaximumWidth="50" DataType="AnsiString" ColumnType="Delimited" CodePage="1252" Delimiter="," TextQualified="true" />
+<Column Name="FiscalQuarterStr" Length="100" InputLength="50" MaximumWidth="50" DataType="AnsiString" ColumnType="Delimited" CodePage="1252" Delimiter="," TextQualified="true" />
+<Column Name="PeriodEndDateStr" Length="100" InputLength="50" MaximumWidth="50" DataType="AnsiString" ColumnType="Delimited" CodePage="1252" Delimiter="," TextQualified="true" />
+<Column Name="AccountStr" Length="100" InputLength="50" MaximumWidth="50" DataType="AnsiString" ColumnType="Delimited" CodePage="1252" Delimiter="," TextQualified="true" />
+<Column Name="SubAccountStr" Length="100" InputLength="50" MaximumWidth="50" DataType="AnsiString" ColumnType="Delimited" CodePage="1252" Delimiter="," TextQualified="true" />
+<Column Name="ValueStr" Length="100" InputLength="50" MaximumWidth="50" DataType="AnsiString" ColumnType="Delimited" CodePage="1252" Delimiter="," TextQualified="true" />

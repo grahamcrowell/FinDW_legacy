@@ -12,9 +12,12 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5644FA8B-A3DA-46E0-8D66-C79D3E30CF65}"
 	ProjectSection(SolutionItems) = preProject
 		readme.md = readme.md
+		SqlQuery_2.sql = SqlQuery_2.sql
 	EndProjectSection
 EndProject
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "FinDW_py", "FinDW_py\FinDW_py.pyproj", "{DF1DF1E7-E38D-43B6-AF7D-3D1C4DE9C6E9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinDW_OdbcCs", "FinDW_OdbcCs\FinDW_OdbcCs.csproj", "{92A9B8EE-6201-49EB-B821-2EED50D77ACF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,6 +53,12 @@ Global
 		{DF1DF1E7-E38D-43B6-AF7D-3D1C4DE9C6E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DF1DF1E7-E38D-43B6-AF7D-3D1C4DE9C6E9}.Development|Any CPU.ActiveCfg = Debug|Any CPU
 		{DF1DF1E7-E38D-43B6-AF7D-3D1C4DE9C6E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92A9B8EE-6201-49EB-B821-2EED50D77ACF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92A9B8EE-6201-49EB-B821-2EED50D77ACF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92A9B8EE-6201-49EB-B821-2EED50D77ACF}.Development|Any CPU.ActiveCfg = Debug|Any CPU
+		{92A9B8EE-6201-49EB-B821-2EED50D77ACF}.Development|Any CPU.Build.0 = Debug|Any CPU
+		{92A9B8EE-6201-49EB-B821-2EED50D77ACF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92A9B8EE-6201-49EB-B821-2EED50D77ACF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

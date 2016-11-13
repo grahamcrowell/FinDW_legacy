@@ -1,0 +1,15 @@
+<# var sourceConnection = RootNode.DbConnections["Source"]; #>
+<# var importResults = sourceConnection.ImportDB(); #>
+<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+    <Packages>
+        <# foreach (var table in importResults.TableNodes) { #>
+        <Package Name="Copy <#=table.Name#>" ConstraintMode="Parallel">
+            <Tasks>
+                <Dataflow Name="DFT_CopyData">
+                    
+                </Dataflow>
+            </Tasks>
+        </Package>
+        <# } #>
+    </Packages>
+</Biml>
