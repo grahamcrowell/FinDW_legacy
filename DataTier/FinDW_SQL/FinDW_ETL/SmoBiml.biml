@@ -1,0 +1,37 @@
+<#@ template language="C#" hostspecific="true"#>
+<#@ import namespace="System.Data" #>
+<#@ import namespace="Microsoft.SqlServer.Management.Smo" #>
+<#@ assembly name= "C:\Windows\assembly\GAC_MSIL\Microsoft.SqlServer.Smo\11.0.0.0__89845dcd8080cc91\Microsoft.SqlServer.Smo.dll" />
+
+<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+    <Packages>
+        <!--  Connects to a live database, using standard ADO.NET, to create a set of packages 
+              that correspond to the tables in that database. -->
+        <#  var connectionStringBuilder = new System.Data.SqlClient.SqlConnectionStringBuilder("Server=PC;Initial Catalog=Staging;Integrated Security=SSPI;");
+ 
+            var con = new System.Data.SqlClient.SqlConnection(connectionStringBuilder.ConnectionString);
+            con.Open();
+            var tblDatabases = con.GetSchema("Databases", new string[] { "Staging" });
+ 
+            foreach (System.Data.DataRow database in tblDatabases.Rows)
+            {
+                connectionStringBuilder.InitialCatalog = database["database_name"].ToString();
+ 
+                var conTbl = new System.Data.SqlClient.SqlConnection(connectionStringBuilder.ConnectionString);
+                conTbl.Open();
+ 
+                var tblTables = conTbl.GetSchema(System.Data.SqlClient.SqlClientMetaDataCollectionNames.Tables);
+ 
+                foreach (System.Data.DataRow table in tblTables.Rows)
+                { #>
+                    <Package Name="<#=table["table_name"]#>">
+                        <!--  Your logic here -->
+                    </Package>
+                <# }
+ 
+                conTbl.Close();
+            }
+ 
+            con.Close(); #>
+    </Packages>
+</Biml>

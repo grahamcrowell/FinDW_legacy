@@ -65,5 +65,22 @@
   </ItemGroup>
   <ItemGroup>
     <Build Include="Statement.sql" />
+    <Build Include="Etl.sql" />
+    <Build Include="Etl.FinancialStatement.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FinDW\FinDW.sqlproj">
+      <Name>FinDW</Name>
+      <Project>{cefa2258-e461-4796-ad37-7e9fbd616a90}</Project>
+      <Private>True</Private>
+      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
+      <DatabaseSqlCmdVariable>FinDW</DatabaseSqlCmdVariable>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <SqlCmdVariable Include="FinDW">
+      <DefaultValue>FinDW</DefaultValue>
+      <Value>$(SqlCmdVar__1)</Value>
+    </SqlCmdVariable>
   </ItemGroup>
 </Project>

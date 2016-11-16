@@ -73,6 +73,10 @@
     <Build Include="dbo.StatementFact.sql" />
     <Build Include="INSERT-Dims.sql" />
     <Build Include="dbo.StageStatement.sql" />
+    <Build Include="Dim.FinancialAccount.sql" />
+    <Build Include="Etl.usp_DimLkup.sql" />
+    <Build Include="dbo.Default1.sql" />
+    <Build Include="Etl.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="FinDW.refactorlog" />
