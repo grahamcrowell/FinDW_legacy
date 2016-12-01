@@ -7,6 +7,24 @@ archive_dir = tools.stmt_parsed
 
 HtmlParseParam = collections.namedtuple('HtmlParseParam',['html_src_path', 'html_dst_dir', 'csv_dst_dir'])
 
+class StatementRecord:
+	__account = ''
+	__sub_account = ''
+	__fiscal_period = ''
+	__sub_account_name = ''
+	__fiscal_period_end_date = ''
+	__money_amount = ''
+
+	__statement_number = ''
+	__cid = ''
+	__download_date = ''
+
+	def __init__(self):
+		pass
+	def get_header(self):
+		return ''
+	def get_csv(self):
+		return ''
 
 def parse_stmt(html_parse_param):
 	# single named tuple parameter to allow calling from multiprocessing.map

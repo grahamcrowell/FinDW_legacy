@@ -6,20 +6,20 @@ Output: model
 
 - LogicalDataField
   - SourceIdentifier
-    - RecordIdentifier 
-    - DegenerateDim
-    - HierarchyKey
-      - SelfReferenceKey
-      - ForeignReferenceKey
-  - SourceDimLookup
-  - SourceFact
+    - RecordIdentifier NK
+    - DegenerateDim DD
+    - HierarchyKey HK
+      - SelfReferenceKey SRK
+      - ForeignReferenceKey FRK 
+  - SourceDimLookup DL
+  - SourceFact F
 
 # LogicalDataField
   + Name
   + PhysicalDataColumnList : List\<PhysicalDataColumn\>
   + FieldColumnExpression
 
-# SourceKey
+# RecordIdentifier
 
 Uniquely identifies a source data row/record
 
@@ -33,8 +33,9 @@ Examples: SourceReferralID, SourceAssessmentHeaderID, VisitID
 
 Reference to another field in the model
 
-- SourceIdentifierField
+## Self Reference Key
 
+Implements recursive self join
 
 # DegenerateDim
 
