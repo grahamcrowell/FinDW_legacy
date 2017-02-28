@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+</head>
+<body>
+<div id="TOC">
+<ul>
+<li><a href="#base-layer">Base Layer</a></li>
+<li><a href="#logicaldatafield">LogicalDataField</a></li>
+<li><a href="#sourcekey">SourceKey</a></li>
+<li><a href="#hierarchyreferencekey">HierarchyReferenceKey</a></li>
+<li><a href="#degeneratedim">DegenerateDim</a></li>
+</ul>
+</div>
+<h1 id="base-layer">Base Layer</h1>
+<p>Input: SQL, flat file, ?denodo?</p>
+<p>Output: model</p>
+<ul>
+<li>LogicalDataField</li>
+<li>SourceIdentifier
+<ul>
+<li>RecordIdentifier</li>
+<li>DegenerateDim</li>
+<li>HierarchyKey</li>
+<li>SelfReferenceKey</li>
+<li>ForeignReferenceKey</li>
+</ul></li>
+<li>SourceDimLookup</li>
+<li>SourceFact</li>
+</ul>
+<h1 id="logicaldatafield">LogicalDataField</h1>
+<ul>
+<li>Name</li>
+<li>PhysicalDataColumnList : List&lt;PhysicalDataColumn&gt;</li>
+<li>FieldColumnExpression</li>
+</ul>
+<h1 id="sourcekey">SourceKey</h1>
+<p>Uniquely identifies a source data row/record</p>
+<p>Primary/natural/business key</p>
+<p>SQL constraint: <code>COUNT(*) = COUNT(DISTINCT FieldColumnExpression)</code></p>
+<p>Examples: SourceReferralID, SourceAssessmentHeaderID, VisitID</p>
+<h1 id="hierarchyreferencekey">HierarchyReferenceKey</h1>
+<p>Reference to another field in the model</p>
+<ul>
+<li>SourceIdentifierField</li>
+</ul>
+<h1 id="degeneratedim">DegenerateDim</h1>
+</body>
+</html>

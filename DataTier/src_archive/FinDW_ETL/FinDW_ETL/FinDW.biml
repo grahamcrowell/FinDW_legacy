@@ -1,0 +1,36 @@
+<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+           <FileFormats>
+        <!-- Flat file format that specifies the columns and delimeter used to extract a table from a flat file.  -->
+        <FlatFileFormat Name="MetadataFileFormat" RowDelimiter="LF" ColumnNamesInFirstDataRow="true" IsUnicode="false">
+            <Columns>
+                <Column Name="Category" DataType="String" Length="128" Delimiter="Tab" CodePage="1252" />
+                <Column Name="DisplayName" DataType="String" Length="256" Delimiter="Tab" />
+                <Column Name="Maturity" DataType="String" Length="32" Delimiter="Tab" />
+                <Column Name="Frequency" DataType="String" Length="32" Delimiter="Tab" />
+                <Column Name="Status" DataType="String" Length="32" Delimiter="Tab" />
+                <Column Name="CompactName" DataType="String" Length="32" Delimiter="Tab" />
+                <Column Name="Url" DataType="String" Length="4000" Delimiter="Tab" />
+                <Column Name="HeaderRowsToSkip" Delimiter="Tab" />
+                <Column Name="DateGrain" DataType="String" Length="32" Delimiter="LF" />
+            </Columns>
+        </FlatFileFormat>
+            
+    </FileFormats>
+    <Connections>
+        <Connection Name="staging" ConnectionString="Data Source=PC;Initial Catalog=Staging;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+        <Connection Name="FinDW" ConnectionString="Data Source=PC;Initial Catalog=FinDW;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+        
+
+<FlatFileConnection Name="lkj" FilePath="C:/Users/User/Dropbox/FinDW/Data/Loading/Statement/949111_2_2015-10-05_80.csv" DelayValidation="true" FileFormat="MetadataFileFormat" />
+    </Connections>
+    <Packages>
+        <Package Name="FinDW" DelayValidation="true">
+            <Tasks>
+                <ExecuteSQL Name="sql task" ConnectionName="FinDW" >
+                    <DirectInput>CREATE DATABASE gcDeb;</DirectInput>
+                </ExecuteSQL>
+            </Tasks>
+        </Package>
+    </Packages>
+    
+</Biml>

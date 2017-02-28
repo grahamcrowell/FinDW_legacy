@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+</head>
+<body>
+<div id="TOC">
+<ul>
+<li><a href="#business-process">Business Process</a></li>
+<li><a href="#dimension-ifield">Dimension : IField</a></li>
+<li><a href="#sourcekey-ifield-list">SourceKey : IField, List<SourceKeyField></a></li>
+<li><a href="#sourcekeycolumn-ifield">SourceKeyColumn : IField</a></li>
+<li><a href="#ifield">IField</a></li>
+</ul>
+</div>
+<h1 id="business-process">Business Process</h1>
+<h1 id="dimension-ifield">Dimension : IField</h1>
+<ul>
+<li>IDColumn : IField</li>
+<li>DescColumn : IField</li>
+<li>TableName</li>
+</ul>
+<h1 id="sourcekey-ifield-list">SourceKey : IField, List<SourceKeyField></h1>
+<h1 id="sourcekeycolumn-ifield">SourceKeyColumn : IField</h1>
+<ul>
+<li>isForiegnKey</li>
+<li>isLocalKey</li>
+</ul>
+<h1 id="ifield">IField</h1>
+<ul>
+<li>name</li>
+<li>type</li>
+<li>isUnique</li>
+<li>isNullable</li>
+</ul>
+<p>every loading folder corresponds to 1 staging table</p>
+<pre><code>%FinDW root%/Data/Loading/&lt;staging_table_name&gt;</code></pre>
+<p>staging.<subject_name> fact.<subject_name></p>
+</body>
+</html>

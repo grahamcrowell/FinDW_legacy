@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<BCPFORMAT xmlns="http://schemas.microsoft.com/sqlserver/2004/bulkload/format" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<RECORD>
+		<!-- import_path, "C:/Users/user/Dropbox/FinDW/Data/Loading/Statement\11742_1_2015-10-05_80.html",-->
+		<FIELD ID="1" xsi:type="CharTerm" TERMINATOR=',' MAX_LENGTH="200" COLLATION="SQL_Latin1_General_CP1_CI_AS"/>
+		<!-- CIDStr, 11742,-->
+		<FIELD ID="2" xsi:type="CharTerm" TERMINATOR=',' MAX_LENGTH="30" COLLATION="SQL_Latin1_General_CP1_CI_AS"/>
+		<!-- StatementIDStr, 1,-->
+		<FIELD ID="3" xsi:type="CharTerm" TERMINATOR=',' MAX_LENGTH="25" COLLATION="SQL_Latin1_General_CP1_CI_AS"/>
+		<!-- download_date, 2015-10-05,-->
+		<FIELD ID="4" xsi:type="CharTerm" TERMINATOR=',' MAX_LENGTH="1" COLLATION="SQL_Latin1_General_CP1_CI_AS"/>
+		<!-- FiscalQuarterStr, 2,-->
+		<FIELD ID="5" xsi:type="CharTerm" TERMINATOR=',' MAX_LENGTH="200" COLLATION="SQL_Latin1_General_CP1_CI_AS"/>
+		<!-- PeriodEndDateStr, 6/30/2015,-->
+		<FIELD ID="6" xsi:type="CharTerm" TERMINATOR=',"' MAX_LENGTH="30" COLLATION="SQL_Latin1_General_CP1_CI_AS"/>
+		<!-- AccountStr, "Total Revenue",-->
+		<FIELD ID="7" xsi:type="CharTerm" TERMINATOR='","' MAX_LENGTH="25" COLLATION="SQL_Latin1_General_CP1_CI_AS"/>
+		<!-- SubAccountStr, "",-->
+		<FIELD ID="8" xsi:type="CharTerm" TERMINATOR='",' MAX_LENGTH="1" COLLATION="SQL_Latin1_General_CP1_CI_AS"/>
+		<!-- ValueStr 13955-->
+		<FIELD ID="9" xsi:type="CharTerm" TERMINATOR='\r\n' MAX_LENGTH="200" COLLATION="SQL_Latin1_General_CP1_CI_AS"/>
+	</RECORD>
+	<ROW>
+		<!-- import_path, "C:/Users/user/Dropbox/FinDW/Data/Loading/Statement\11742_1_2015-10-05_80.html",-->
+		<COLUMN SOURCE="1" NAME="import_path" xsi:type="SQLVARYCHAR"/>
+		<!-- CIDStr, 11742,-->
+		<COLUMN SOURCE="2" NAME="CIDStr" xsi:type="SQLINT"/>
+		<!-- StatementIDStr, 1,-->
+		<COLUMN SOURCE="3" NAME="StatementIDStr" xsi:type="SQLINT"/>
+		<!-- download_date, 2015-10-05,-->
+		<COLUMN SOURCE="4" NAME="download_date" xsi:type="SQLVARYCHAR"/>
+		<!-- FiscalQuarterStr, 2,-->
+		<COLUMN SOURCE="5" NAME="FiscalQuarterStr" xsi:type="SQLINT"/>
+		<!-- PeriodEndDateStr, 6/30/2015,-->
+		<COLUMN SOURCE="1" NAME="PeriodEndDateStr" xsi:type="SQLVARYCHAR"/>
+		<!-- AccountStr, "Total Revenue",-->
+		<COLUMN SOURCE="7" NAME="AccountStr" xsi:type="SQLVARYCHAR"/>
+		<!-- SubAccountStr, "",-->
+		<COLUMN SOURCE="8" NAME="SubAccountStr" xsi:type="SQLVARYCHAR"/>
+		<!-- ValueStr 13955-->
+		<COLUMN SOURCE="9" NAME="ValueStr" xsi:type="SQLBIGINT"/>
+	</ROW>
+</BCPFORMAT>
+
+
+
+
+
+
+
+
+

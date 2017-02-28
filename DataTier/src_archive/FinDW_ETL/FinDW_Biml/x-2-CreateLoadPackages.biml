@@ -1,0 +1,28 @@
+<#@ template tier="2" #>
+<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+  <Packages>
+    <Package Name="Copy Data" ConstraintMode="Parallel">
+      <Tasks>
+        <# foreach (var table in RootNode.Tables) { #>
+        <Dataflow Name="Copy DataPatterns_<#=table.Schema.Name#>_<#=table.Name#>">
+          <Transformations>
+            <OleDbSource Name="Retrieve Rows" ConnectionName="Source">
+              <DirectInput>SELECT <#=table.GetColumnList()#> FROM <#=table.GetTag("SourceSchemaQualifiedName")#></DirectInput>
+            </OleDbSource>
+            <# foreach (var column in table.Columns.Where(c => c.GetTag("ConvertToUnicode") == "yes")) { #>
+            <DataConversion Name="Convert <#=column.Name#>">
+              <Columns>
+                <Column SourceColumn="<#=column.Name#>" TargetColumn="<#=column.Name#>" DataType="String" Length="<#=column.Length#>" />
+              </Columns>
+            </DataConversion>
+              <#} #>
+            <OleDbDestination Name="Load Rows" ConnectionName="Target">
+              <TableOutput TableName="<#=table.ScopedName#>" />
+            </OleDbDestination>
+          </Transformations>
+        </Dataflow>
+          <# } #>
+      </Tasks>
+    </Package>
+  </Packages>
+</Biml>
